@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+:root {
+  /* --- MÀU CỦA BẠN ĐÃ CHỌN --- */
+  --color-primary: var(--color-red-400);      /* #F87171 - Nút chính, Icon nổi bật */
+  --color-bg-body: var(--color-stone-50);     /* #FAFAF9 - Nền trang web */
+  --color-border-strong: var(--color-stone-400); /* #A8A29E - Viền input, icon phụ */
+
+  /* --- MÀU ĐỀ XUẤT THÊM --- */
+  
+  /* 1. Tương tác (Hover states) */
+  --color-primary-hover: var(--color-red-500); /* #EF4444 */
+  --color-primary-active: var(--color-red-600);/* #DC2626 */
+
+  /* 2. Văn bản (Text) */
+  --color-text-main: var(--color-stone-900);   /* #1C1917 - Chữ chính */
+  --color-text-muted: var(--color-stone-500);  /* #78716C - Chữ phụ, caption */
+  --color-text-on-primary: #FFFFFF;            /* Chữ trên nút đỏ */
+
+  /* 3. Trang trí & Layout */
+  --color-bg-card: #FFFFFF;                    /* Nền của các khối nội dung (Card) */
+  --color-bg-secondary: var(--color-stone-100);/* #F5F5F4 - Nền hover menu */
+  --color-border-subtle: var(--color-stone-200);/* #E7E5E4 - Viền nhẹ chia cắt */
+
+  /* 4. Trạng thái (Semantic) */
+  --color-success: var(--color-emerald-500);   /* #10B981 */
+  --color-warning: var(--color-amber-400);     /* #FBBF24 */
+
+  --bg-color: #e0e0e0;
+  --shadow-light: #ffffff;
+  --shadow-dark: #bebebe;
+}
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #f0f0f0;
+}
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+
+    background-color: var(--color-stone-50);
+    color: var(--color-stone-900);
+}
+
+::view-transition-old(root) {
+  animation: fade-out 0.5s;
+}
+
+::view-transition-new(root) {
+  animation: slide-in 0.5s;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
