@@ -1,0 +1,141 @@
+.dashboard-container{
+    width:100%;
+    height:100%;
+}
+.analysis{
+    width:100%;
+    display:flex;
+    margin-bottom:12px;
+}
+.analysis-reports{
+    flex:1;
+    width:calc(75%);
+}
+.reports{
+    display:flex;
+    flex-direction: column;
+    border-radius:4px;
+    padding:8px 12px;
+    border:1px solid lightgray;
+}
+.report-title{
+    font-size:1.3em;
+    font-weight:700;
+    color:var(--color-red-400)
+}
+.widget{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    height:100%;
+    width:100%;
+}
+
+.widget-block{
+    border-radius:4px;
+    background-color: whitesmoke;
+    box-shadow:1px 1px 1px 1px gray;
+    width:25%;
+    padding:4px;
+}
+
+.widget-title{
+    font-weight:500;
+    font-size:1.2em;
+    color:brown
+}
+
+.widget-navigation{
+    display:block;
+    font-size:0.9em;
+    color:orangered;
+    text-align: right;
+    text-decoration: underline;
+    text-decoration-line: underline;
+}
+
+.widget-status{
+    color:red;
+    font-size:1.1em;
+}
+
+.widget-block:not(:first-child){
+    margin-left:12px;
+}
+.report{
+    width:100%;
+    display:flex;
+}
+
+.report__chart{
+    width:50%;
+    padding: 12px 0px;
+    margin-top:12px;
+}
+.report__classification{
+    margin-top:12px;
+    width:50%;
+    padding: 12px 0px 12px 8px;
+}
+.classification__title{
+    font-size:1.3em;
+    font-weight:600;
+}
+
+.widget-todo{
+    width:50%;
+}
+
+.word-container{
+    display:flex;
+    flex-wrap:wrap;
+    -ms-flex-wrap: wrap;
+}
+.word-card{
+    box-sizing: border-box;
+    padding:4px 8px;
+    margin:4px 4px;
+    width:calc((100% / 5) - 8px);
+    border-radius:4px;
+    box-shadow: 1px 1px 1px 1px #3233
+}
+.activity{
+    margin-left:12px;
+    width:calc(25%);
+    padding:8px 12px;
+    border:1px solid lightgray;
+    border-radius:4px;
+}
+
+.activity__target{
+
+}
+
+.todos__title , .action__title{
+    font-size:1.3em;
+    font-weight:600;
+    color: var(--color-red-400);
+}
+
+.timeline{
+    margin:8px 0px;
+    height:200px;
+}
+
+.timeline__block{
+    border-left:1px solid lightblue;
+    position:relative;
+    padding:8px 12px;
+}
+
+.timeline__block::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    left:-4px;
+    top:50%;
+    border:1px solid transparent;
+    width:8px;
+    height:8px;
+    background-color:green;
+}

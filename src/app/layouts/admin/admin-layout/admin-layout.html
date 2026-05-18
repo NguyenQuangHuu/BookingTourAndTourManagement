@@ -1,0 +1,52 @@
+<div class="admin-layout">
+  <aside class="admin-layout__sidebar sidebar collapsed">
+          <div class="sidebar__logo logo">
+            <div class="logo__icon expanded"><lucide-icon [img]="houseIcon" strokeWidth="2"></lucide-icon></div>
+            <h4 class="logo__title collapsed">GrowUp</h4>
+          </div>
+    <nav class="sidebar__nav nav">
+
+      <ul class="nav__list">
+        <li class="nav__item"><a class="nav__link"><lucide-icon [img]="chartLineIcon" class="nav__icon"></lucide-icon>Tổng quan</a></li>
+        <li class="nav__item"><a class="nav__link"><lucide-icon [img]="albumIcon" size="24px" strokeWidth="2" class="nav__icon"></lucide-icon>Từ vựng</a></li>
+        <li class="nav__item"><a class="nav__link"> <lucide-icon [img]="userIcon" class="nav__icon"></lucide-icon>Profile</a></li>
+      </ul>
+    </nav>
+    <div class="admin-layout__profile profile">
+        <div class="profile__logout">
+          <a routerLink="log-out" class="nav__link"><lucide-icon [img]="logOutIcon" class="nav__icon"></lucide-icon>Đăng xuất</a>
+        </div>
+        <div class="feature__dark-mode" aria-label="Toogle Dark Mode">
+          <input type="checkbox" class="dark-mode__toggle"/>
+          <lucide-icon [img]="sunIcon" size="20" class="dark-mode__icon active"></lucide-icon>
+          <lucide-icon [img]="moonIcon" size="20" class="dark-mode__icon"></lucide-icon>
+        </div>
+    </div>
+  
+  </aside>
+  <div class="admin-container">
+    <header class="admin-header user">
+      <div class="user__profile">
+        <div> Breadcum</div>
+        <div class="user__profile">
+          <div class="profile__avatar">
+            <img alt="error" src=""/>
+          </div>
+          <div class="profile__navigation">
+            <ul>
+              <li>Thông tin cá nhân</li>
+              <li>Cài đặt</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="admin-main">
+      <router-outlet></router-outlet>
+    </main>
+    <footer class="admin-footer">
+    <h5>Designed By DaiGia</h5>
+  </footer>
+</div>
+
+</div>

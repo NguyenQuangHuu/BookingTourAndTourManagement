@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>Chat với Gemini Angular</h2>
+  
+  <textarea [(ngModel)]="prompt" placeholder="Nhập câu hỏi của bạn..."></textarea>
+  <button (click)="sendToGemini()" [disabled]="isLoading()">
+    {{ isLoading() ? 'Đang suy nghĩ...' : 'Gửi' }}
+  </button>
+  @if(response()){
+    <div class="response-box">
+    <strong>Gemini:</strong>
+    <p>{{ response() }}</p>
+  </div>
+  }
+
+</div>

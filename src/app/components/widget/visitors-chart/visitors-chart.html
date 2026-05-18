@@ -1,0 +1,27 @@
+<div class="visitor-chart chart">
+    <div class="chart__header header">
+        <div class="header__title">
+            <p>Lượt truy cập</p>
+        </div>
+        <div class="header__button">
+            <div class="slider" 
+            [style.width.px]="sliderStyle().width" 
+            [style.transform]="'translateX(' + sliderStyle().left + 'px)'">
+        </div>
+            @for (button of buttons();let i = $index;track i) {
+                <button class="btn" 
+                [class.btn--selected]="selectedButton()===button.id"
+                [class.btn--disabled]="button.enable === false"
+                 #btnRef (click)="buttonClick(button.id,btnRef)">{{button.label}}</button>
+            }
+
+        </div>
+    </div>
+    <div class="chart__container">
+        <div echarts 
+         [options]="chartOption()" 
+         [style.height.px]="220"
+         class="demo-chart">
+    </div>
+    </div>
+</div>

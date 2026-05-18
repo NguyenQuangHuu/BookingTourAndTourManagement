@@ -1,0 +1,225 @@
+.wrapper {
+    padding: 24px; /* Tăng padding chút cho thoáng */
+    border: 1px solid var(--color-stone-200); /* Viền nhẹ nhàng hơn */
+    border-radius: 8px; /* Bo góc mềm mại hơn */
+    background-color: var(--color-bg-card); /* Card nền trắng nổi bật trên nền Stone-50 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Shadow nhẹ */
+    max-width: 400px; /* Giới hạn chiều rộng nếu cần */
+    margin: 20px auto;
+}
+
+.wrapper__title {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-red-400); /* Màu chủ đạo */
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.wrapper__message {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+    text-align: center;
+}
+
+.wrapper__message--danger {
+    color: var(--color-red-500);
+    font-size: 0.9em;
+}
+
+/* --- GROUP & LABEL (Đã bao gồm fix bôi đen) --- */
+.form-login__group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px; /* Khoảng cách giữa các dòng */
+    
+    /* FIX: Ngăn bôi đen khi click hụt */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.form-login__group .form-login__label {
+    font-size: 1em;
+    font-weight: 500;
+    width: 90px; /* Tăng nhẹ chiều rộng */
+    color: var(--color-stone-900); /* Text đậm rõ ràng */
+    cursor: pointer;
+    user-select: none;
+}
+
+/* FIX: Logic pointer-events để chặn double click */
+.form-login__group:focus-within .form-login__label {
+    pointer-events: none;
+    color: var(--color-red-400); /* Highlight label khi focus input (Optional - cho đẹp) */
+    transition: color 0.2s;
+}
+
+.form-login__group .form-login__input {
+    flex: 1;
+}
+
+/* --- INPUT TEXT STYLE --- */
+.form-login__input input[type='text'] {
+    width: 100%;
+    padding: 10px 12px;
+    box-sizing: border-box; /* Quan trọng để không vỡ layout */
+    
+    appearance: none;
+    border: 1px solid var(--color-stone-300); /* Viền xám trung tính */
+    border-radius: 6px;
+    background-color: #fff;
+
+    font-family: inherit;
+    font-size: 16px; /* Chống zoom iOS */
+    color: var(--color-stone-900);
+    
+    caret-color: var(--color-red-400); /* Con trỏ màu đỏ */
+    transition: all 0.2s ease-in-out;
+    
+    /* FIX: Cho phép bôi đen text trong input */
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.form-login__input input::placeholder {
+    color: var(--color-stone-400); /* Placeholder nhạt */
+    opacity: 1;
+}
+
+.form-login__input input:focus::placeholder {
+    color: transparent;
+}
+
+/* FOCUS STATE: Chuyển sang màu ĐỎ */
+.form-login__input input[type='text']:focus {
+    outline: none;
+    border-color: var(--color-red-400);
+    box-shadow: 0 0 0 3px var(--color-red-shadow); /* Glow đỏ nhạt */
+}
+
+/* --- CHECKBOX CUSTOM (ANIMATION MƯỢT) --- */
+.form-login__checkbox {
+    text-align: center;
+    margin: 20px 0;
+    position: relative; /* Để căn chỉnh */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox__input {
+    /* Ẩn input gốc */
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox__label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 28px; /* Chừa chỗ vẽ ô vuông */
+    user-select: none;
+    color: var(--color-stone-500); /* Text checkbox nhạt hơn title chút */
+    font-size: 1em;
+    line-height: 20px;
+}
+
+/* Vẽ ô vuông */
+.checkbox__label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #fff;
+    border: 2px solid var(--color-stone-300); /* Viền thường */
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Vẽ dấu tích */
+.checkbox__label::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    opacity: 0;
+    transform: rotate(45deg) scale(0.8);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Checked State */
+.checkbox__input:checked + .checkbox__label::before {
+    background-color: var(--color-red-400);
+    border-color: var(--color-red-400);
+}
+
+.checkbox__input:checked + .checkbox__label::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+}
+
+/* Fix Focus Checkbox */
+.checkbox__input:focus + .checkbox__label::before {
+    box-shadow: 0 0 0 3px var(--color-red-shadow);
+}
+
+/* Fix Double Click Checkbox */
+.checkbox__input:focus + .checkbox__label {
+    pointer-events: none;
+}
+
+/* --- BUTTONS --- */
+.form-login__action {
+    display: flex;
+    justify-content: center;
+    gap: 12px; /* Khoảng cách giữa 2 nút */
+    margin-top: 8px;
+}
+
+.btn {
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent; /* Tránh giật layout khi hover thêm border */
+}
+
+/* Nút Primary (Đỏ) */
+.btn--primary {
+    background-color: var(--color-red-400);
+    color: white;
+    border-color: var(--color-red-400);
+}
+
+.btn--primary:hover {
+    background-color: var(--color-red-500); /* Đậm hơn khi hover */
+    border-color: var(--color-red-500);
+}
+
+/* Nút Secondary (Back) */
+.btn--secondary {
+    background-color: white;
+    color: var(--color-stone-500);
+    border: 1px solid var(--color-stone-300);
+}
+
+.btn--secondary:hover {
+    background-color: var(--color-stone-50); /* Stone-50 nhẹ nhàng */
+    color: var(--color-stone-900);
+    border-color: var(--color-stone-400);
+}
