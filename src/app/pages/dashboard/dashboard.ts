@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { VisitorsChart } from "../../components/widget/visitors-chart/visitors-chart";
 import { WordTypePie } from '../../components/widget/word-type-pie/word-type-pie';
 
@@ -6,6 +6,7 @@ import { WordTypePie } from '../../components/widget/word-type-pie/word-type-pie
   selector: 'app-dashboard',
   imports: [VisitorsChart,WordTypePie],
   templateUrl: './dashboard.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard.css',
 })
 export class Dashboard {

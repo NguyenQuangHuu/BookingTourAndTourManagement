@@ -1,4 +1,4 @@
-import { Component,signal, viewChildren,ElementRef, effect, afterNextRender } from '@angular/core';
+import { Component, signal, viewChildren, ElementRef, effect, afterNextRender, ChangeDetectionStrategy } from '@angular/core';
 import { NgxEchartsDirective } from 'ngx-echarts';
 import { first } from 'rxjs';
 import * as echarts from "echarts";
@@ -7,6 +7,7 @@ import type {EChartsOption} from "echarts"
   selector: 'app-visitors-chart',
   imports: [NgxEchartsDirective],
   templateUrl: './visitors-chart.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './visitors-chart.css',
 })
 export class VisitorsChart {

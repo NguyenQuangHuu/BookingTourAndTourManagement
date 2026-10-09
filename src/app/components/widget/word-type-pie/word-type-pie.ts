@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgxEchartsDirective } from 'ngx-echarts';
 import * as echarts from "echarts";
 import type {EChartsOption} from "echarts"
@@ -6,6 +6,7 @@ import type {EChartsOption} from "echarts"
   selector: 'app-word-type-pie',
   imports: [NgxEchartsDirective],
   templateUrl: './word-type-pie.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './word-type-pie.css',
 })
 export class WordTypePie {

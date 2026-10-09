@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-show-movie',
   imports: [],
   templateUrl: './show-movie.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './show-movie.css',
 })
 export class ShowMovie {
