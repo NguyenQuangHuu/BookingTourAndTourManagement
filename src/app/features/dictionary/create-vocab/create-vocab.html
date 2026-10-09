@@ -1,0 +1,12 @@
+<p>create-vocab works!</p>
+<form  novalidate (submit)="onSubmit($event)">
+  <input type="text" [formField]="createForm.german_word" />
+  @if(createForm.german_word().dirty()){
+  @if(createForm.german_word().errors();as errors){
+    @for(err of errors;track $index){
+      <span>{{err.message}}</span>
+    }
+  }
+}
+  <button type="submit">submit</button>
+</form>

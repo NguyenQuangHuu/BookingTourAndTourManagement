@@ -1,0 +1,17 @@
+<p>list-page works!</p>
+<table>
+  <thead>
+    <td>Abc</td>
+  </thead>
+  <tbody>
+    @for (x of vocabs();track $index){
+      <tr>
+        <td>{{x.german_word}}</td>
+      </tr>
+    }
+  </tbody>
+</table>
+<div>
+  <p>Number of Draft</p>
+  <span>{{draftCount()}}</span>
+</div>
