@@ -4,7 +4,7 @@
     <td>Abc</td>
   </thead>
   <tbody>
-    @for (x of vocabs();track $index){
+    @for (x of vocab_store.vocabs();track $index){
       <tr>
         <td>{{x.german_word}}</td>
       </tr>
@@ -13,5 +13,6 @@
 </table>
 <div>
   <p>Number of Draft</p>
-  <span>{{draftCount()}}</span>
+  <span>{{vocab_store.genderStats()}}</span>
+  <span>{{vocab_store.publishCount()}}</span>
 </div>

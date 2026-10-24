@@ -27,7 +27,7 @@ export interface VocabularyReadModel {
   updated_at?: string;
 }
 
-interface Noun {
+export interface Noun {
   plural: string;
   article: Article;
   gender: Gender;
@@ -37,7 +37,7 @@ interface Noun {
   is_singular_only: boolean;
 }
 
-interface Verb {
+export interface Verb {
   present_third_person: string;
   past_simple: string;
   past_participle: string;
