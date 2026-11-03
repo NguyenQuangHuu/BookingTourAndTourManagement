@@ -1,0 +1,66 @@
+.task-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 65ch;
+  background-color: var(--white);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2), 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+  padding: var(--space-2);
+  border-radius: var(--radius-3);
+}
+
+.task-card__title {
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.task-card__description {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--gray-600)
+}
+
+.task-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: var(--space-2)
+}
+
+.btn {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-3);
+  border: 1px solid transparent;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn--primary {
+  background-color: var(--primary-700);
+  color: var(--white);
+}
+
+.btn--primary:hover {
+  background-color: var(--primary-600);
+}
+
+.btn--secondary {
+  background-color: var(--gray-50);
+  color: var(--gray-700);
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2), 0 0 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+.btn--secondary:hover {
+  background-color: var(--gray-500);
+  color: var(--gray-50)
+}
+
+.btn--danger {
+  background-color: red;
+  color: var(--white);
+}
+
+.btn--danger:hover {
+  background-color: red;
+  opacity: 0.9;
+}

@@ -1,0 +1,45 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8)
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.dashboard-header__title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+.dashboard-header__description-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: var(--space-8);
+}
+
+.description-item {
+  font-size: var(--text-xs);
+  font-weight: 300;
+  color: var(--gray-500);
+  background-color: var(--gray-100);
+  border-radius: var(--radius-3);
+  border: 1px solid transparent;
+}
+
+.description-item__value {
+  font-size: var(--text-base);
+}
+
+.tasks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  gap: var(--space-2);
+}

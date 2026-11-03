@@ -44,3 +44,10 @@ export interface Verb {
   auxiliary_verb: AuxiliaryVerb;
   is_separable: boolean;
 }
+
+export interface ToDoItem{
+  id: string;
+  title: string;
+  description: string;
+  state: 'done' | 'pending' | 'cancel' | string;
+}

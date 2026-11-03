@@ -1,1 +1,30 @@
-<p>landing-page works!</p>
+<div class="container">
+  <header class="dashboard-header">
+    <h1 class="dashboard-header__title">Danh sách công việc hằng ngày</h1>
+    <dl class="dashboard-header__description-list">
+      <div class="description-item">
+        <dt class="description-item__total">tổng</dt>
+        <dd class="description-item__value">{{ todos.totalCount() }}</dd>
+      </div>
+      <div class="description-item">
+        <dt class="description-item__pending">chưa hoàn thành</dt>
+        <dd class="description-item__value">{{ todos.pendingTasks() }}</dd>
+      </div>
+      <div class="description-item">
+        <dt class="description-item__done">đã hoàn thành</dt>
+        <dd class="description-item__value">{{ todos.doneTasks() }}</dd>
+      </div>
+      <div class="description-item">
+        <dt class="description-item__canceled">đã hủy</dt>
+        <dd class="description-item__value">{{ todos.cancelTasks() }}</dd>
+      </div>
+    </dl>
+  </header>
+  <div class="tasks">
+    @for (todo of todos.listFilter(); track todo.id) {
+      <app-task-card (markCancel)="todos.cancelTask(todo.id)" (markDone)="todos.doneTask(todo.id)"
+                     (restore)="todos.restoreTask(todo.id)" [description]='todo.description' [id]='todo.id'
+                     [state]="todo.state" [title]='todo.title'></app-task-card>
+    }
+  </div>
+</div>
