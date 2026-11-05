@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { AppButton } from '../button/button';
 
 @Component({
@@ -6,6 +6,7 @@ import { AppButton } from '../button/button';
   selector: 'app-task-card',
   styleUrl: './task-card.css',
   templateUrl: './task-card.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
 export class TaskCard {

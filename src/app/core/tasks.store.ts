@@ -2,16 +2,24 @@ import { ToDoItem } from './models';
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
 import { computed } from '@angular/core';
 
+interface FilterCondition {
+  querySearch: string;
+  filterState: 'all' | 'pending' | 'cancel' | 'done';
+  sortBy: 'id' | 'title' | 'date';
+}
+
 interface TaskState {
   items: ToDoItem[];
   isLoading: boolean;
   message: string;
-  error: string;
-  filterCondition: 'cancel' | 'pending' | 'done';
+  error: string | null;
+  filterCondition: FilterCondition;
 }
 
 const initValue: TaskState = {
-  error: '', isLoading: false, items: [], message: '', filterCondition: 'pending'
+  error: null, isLoading: false, items: [], message: '', filterCondition: {
+    querySearch: '', filterState: 'all', sortBy: 'id'
+  }
 };
 
 export const TasksStore = signalStore(
@@ -21,7 +29,14 @@ export const TasksStore = signalStore(
     pendingTasks: computed(() => store.items().filter(item => item.state === 'pending').length),
     doneTasks: computed(() => store.items().filter(item => item.state === 'done').length),
     cancelTasks: computed(() => store.items().filter(item => item.state === 'cancel').length),
-    listFilter: computed(() => store.items().filter(item => item.state === store.filterCondition()))
+    listFilter: computed(() => {
+      const { querySearch, filterState } = store.filterCondition;
+      return store.items().filter((item) => {
+        const matchQuery = item.title.toLowerCase().includes(querySearch().toLowerCase());
+        const matchState = filterState() === 'all' || item.state === filterState();
+        return matchQuery && matchState;
+      });
+    })
   })),
   withMethods((store) => ({
     addTask(title: string, description: string) {
@@ -49,7 +64,23 @@ export const TasksStore = signalStore(
         } : item)
       }));
     },
+    setQuerySearch(query: string) {
+      patchState(store, ({ filterCondition }) => ({
+        filterCondition: { ...filterCondition, querySearch: query }
+      }));
+    },
+    setStatus(status: 'all' | 'pending' | 'cancel' | 'done') {
+      patchState((store), ({ filterCondition }) => ({
+        filterCondition: { ...filterCondition, filterState: status }
+      }));
+    },
+    setSortBy(sortBy: 'id' | 'title' | 'date') {
+      patchState(store, ({ filterCondition }) => ({
+        filterCondition: { ...filterCondition, sortBy: sortBy }
+      }));
+    },
     loadTask() {
+      patchState(store, { isLoading: true });
       const todos: ToDoItem[] = [
         {
           id: '0001',
@@ -67,7 +98,9 @@ export const TasksStore = signalStore(
           description: 'ăn bún bò',
           state: 'cancel'
         }];
-      patchState((store), (items) => ({
+      setTimeout(() => patchState(store, { isLoading: false }), 1000);
+      patchState((store), (currentState) => ({
+        ...currentState,
         items: [...todos]
       }));
     }

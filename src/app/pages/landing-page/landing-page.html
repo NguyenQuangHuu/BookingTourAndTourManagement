@@ -1,6 +1,7 @@
 <div class="container">
   <header class="dashboard-header">
     <h1 class="dashboard-header__title">Danh sách công việc hằng ngày</h1>
+
     <dl class="dashboard-header__description-list">
       <div class="description-item">
         <dt class="description-item__total">tổng</dt>
@@ -19,12 +20,17 @@
         <dd class="description-item__value">{{ todos.cancelTasks() }}</dd>
       </div>
     </dl>
+    <input (input)="updateQuery($event)" [value]="todos.filterCondition().querySearch" type="text" />
   </header>
   <div class="tasks">
-    @for (todo of todos.listFilter(); track todo.id) {
-      <app-task-card (markCancel)="todos.cancelTask(todo.id)" (markDone)="todos.doneTask(todo.id)"
-                     (restore)="todos.restoreTask(todo.id)" [description]='todo.description' [id]='todo.id'
-                     [state]="todo.state" [title]='todo.title'></app-task-card>
+    @if (todos.isLoading()) {
+      ...Loading data
+    } @else {
+      @for (todo of todos.listFilter(); track todo.id) {
+        <app-task-card (markCancel)="todos.cancelTask(todo.id)" (markDone)="todos.doneTask(todo.id)"
+                       (restore)="todos.restoreTask(todo.id)" [description]='todo.description' [id]='todo.id'
+                       [state]="todo.state" [title]='todo.title'></app-task-card>
+      }
     }
   </div>
 </div>

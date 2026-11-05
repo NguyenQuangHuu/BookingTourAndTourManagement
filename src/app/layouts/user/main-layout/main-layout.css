@@ -1,0 +1,14 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.app_sidebar {
+  width: 25%;
+}
+
+.app_main {
+  width: 75%;
+}

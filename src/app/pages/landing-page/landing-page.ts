@@ -14,4 +14,10 @@ import { TasksStore } from '../../core/tasks.store';
 })
 export class LandingPage {
   todos = inject(TasksStore);
+
+  updateQuery(e: Event) {
+    const inputValue = e.target as HTMLInputElement;
+    console.log(inputValue.value);
+    this.todos.setQuerySearch(inputValue.value);
+  }
 }
