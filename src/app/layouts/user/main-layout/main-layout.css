@@ -1,14 +1,109 @@
-.main-container {
+.app-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+
+}
+
+.main-content {
+  background-color: var(--bg-color);
+  over-flow-y: auto;
+}
+
+@media (max-width: 48rem) {
+  .app-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  background-color: var(--surface-color);
   display: flex;
-  flex-direction: row;
-  height: 100%;
-  width: 100%;
+  flex-direction: column;
+  border-right: 1px solid white;
+  padding: var(--space-4);
 }
 
-.app_sidebar {
-  width: 25%;
+.sidebar_logo {
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  margin-bottom: var(--space-4);
 }
 
-.app_main {
-  width: 75%;
+.app_logo {
+  display: block;
+  margin-right: var(--space-2)
 }
+
+.app_logo img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.app_name {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.05;
+  text-transform: uppercase;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid white;
+  flex-grow: 1;
+  gap: var(--space-1);
+}
+
+.nav__group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-4);
+}
+
+.nav__group span {
+  font-size: var(--text-xs);
+  color: var(--text-teriaty);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.nav__link {
+  gap: var(--space-3);
+  color: var(--gray-700);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  border: 1px solid transparent;
+  border-radius: var(--radius-3);
+  padding: var(--space-2) var(--space-3);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav__link:not(.nav__link--active):hover {
+  background-color: var(--gray-200);
+  border: 1px solid transparent;
+}
+
+.nav__link--active {
+  background-color: var(--primary-50);
+  color: var(--primary-700);
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+
+.sidebar__nav ul {
+
+}
+
+
+.sidebar__footer {
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+

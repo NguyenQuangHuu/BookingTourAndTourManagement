@@ -4,8 +4,8 @@
 
 :root {
   /*màu nền*/
-  --bg-color: #f1f5f9;
-  --surface-color: #fff;
+  --bg-color: hsl(210, 20%, 98%);
+  --surface-color: hsl(0, 0%, 100%);
   /*khoảng cách*/
   --space-1: 0.25rem; /* 4px : khoảng cách nhỏ giữa tiêu đề chính và phụ */
   --space-2: 0.5rem;
@@ -59,33 +59,14 @@
   box-sizing: border-box;
 }
 
-::view-transition-old(root) {
-  animation: fade-out 0.5s;
-}
+/*::view-transition-old(root) {*/
+/*  animation: fade-out 0.5s;*/
+/*}*/
 
-::view-transition-new(root) {
-  animation: slide-in 0.5s;
-}
+/*::view-transition-new(root) {*/
+/*  animation: slide-in 0.5s;*/
+/*}*/
 
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 
 body {
   background-color: var(--bg-color);

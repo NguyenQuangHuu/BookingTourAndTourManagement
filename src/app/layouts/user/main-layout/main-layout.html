@@ -1,20 +1,42 @@
-<div class="main-container">
-  <aside class="app_sidebar">
-    <h1 class="app_logo">DeutschLearner</h1>
-    <nav class="app_navigation">
-      <ul class="nav_list">
-        <li class="nav_item"></li>
-      </ul>
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar_logo">
+      <div class="app_logo">
+        <img src="favicon.ico" />
+      </div>
+      <h1 class="app_name">DeutschLearner</h1>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="nav__group">
+        <span class="nav__title">Overview</span>
+        <a class="nav__link nav__link--active" href="#">
+          <span class="nav__icon">i</span>
+          Thống kê
+        </a>
+      </div>
+      <div class="nav__group">
+        <span class="nav__title">Từ vựng</span>
+        <a class="nav__link" href="#">
+          <span class="nav__icon">i</span>
+          Tổng quan
+        </a>
+      </div>
+
     </nav>
-    <footer class="app_footer">
-      sidebar footer
+    <footer class="sidebar__footer">
+      <a href="#">Setting</a>
+      <a href="#">Help</a>
+      <a href="#">Contact</a>
     </footer>
   </aside>
-  <main class="app_main">
-    <header class="h-6  w-full">
-      header
+  <main class="main-content">
+    <header class="navbar">
+      <div class="search-input">
+        <label>Tìm kiếm</label>
+        <input placeholder="Nhập nội dung..." type="text" />
+      </div>
     </header>
     <router-outlet></router-outlet>
-    <footer class="h-6 w-full">Footer</footer>
+    <footer class="content-footer">copyright 123</footer>
   </main>
 </div>
