@@ -12,6 +12,10 @@
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+:host(.icon-only) {
+  border-radius: var(--radius-full);
+}
+
 :host(:disabled) {
   opacity: 0.5;
   pointer-events: none;
@@ -39,4 +43,19 @@
 
 :host(.btn--primary:hover) {
   background-color: var(--primary-600);
+}
+
+:host(.btn--secondary) {
+  background-color: var(--gray-500);
+  color: var(--white);
+}
+
+:host(.btn--secondary:hover) {
+  background-color: var(--gray-600);
+  color: var(--white);
+}
+
+:host(.btn--tertiary) {
+  background-color: var(--gray-700);
+  color: var(--white);
 }

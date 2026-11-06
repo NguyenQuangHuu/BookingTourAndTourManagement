@@ -2,34 +2,50 @@
   <header class="dashboard-header">
     <h1 class="dashboard-header__title">Danh sách công việc hằng ngày</h1>
 
-    <dl class="dashboard-header__description-list">
-      <div class="description-item">
-        <dt class="description-item__total">tổng</dt>
-        <dd class="description-item__value">{{ todos.totalCount() }}</dd>
+    <dl class="overview__data">
+      <div class="data__group">
+        <dt class="data__title">Đã phân công</dt>
+        <dd class="data__value">{{ tasks.totalCount() }}</dd>
       </div>
-      <div class="description-item">
-        <dt class="description-item__pending">chưa hoàn thành</dt>
-        <dd class="description-item__value">{{ todos.pendingTasks() }}</dd>
+      <div class="data__group">
+        <dt class="data__title">Đang thực hiện</dt>
+        <dd class="data__value">{{ tasks.inProgressTasks() }}</dd>
       </div>
-      <div class="description-item">
-        <dt class="description-item__done">đã hoàn thành</dt>
-        <dd class="description-item__value">{{ todos.doneTasks() }}</dd>
+      <div class="data__group">
+        <dt class="data__title">Hoàn thành</dt>
+        <dd class="data__value">{{ tasks.doneTasks() }}</dd>
       </div>
-      <div class="description-item">
-        <dt class="description-item__canceled">đã hủy</dt>
-        <dd class="description-item__value">{{ todos.cancelTasks() }}</dd>
+      <div class="data__group">
+        <dt class="data__title">Quá hạn</dt>
+        <dd class="data__value">{{ tasks.todoTasks() }}</dd>
       </div>
     </dl>
-    <input (input)="updateQuery($event)" [value]="todos.filterCondition().querySearch" type="text" />
   </header>
+  <div
+    class="task__filters">
+    <div class="filter__actions">
+      <button (clickEmit)="tasks.setStatus('ALL')" appButton disabled size="sm" type="button"
+              variant="secondary"><span>i</span> Tất cả <span>i</span>
+      </button>
+      <button (clickEmit)="tasks.setStatus('IN_PROGRESS')" appButton size="sm" type="button" variant="tertiary">Đang làm
+      </button>
+      <button (clickEmit)="tasks.setStatus('DONE')" appButton size="sm" type="button" variant="tertiary">Đã hoàn thành
+      </button>
+      <button (clickEmit)="tasks.setStatus('TODO')" appButton size="sm" type="button" variant="tertiary">Chưa hoàn thành
+      </button>
+    </div>
+    <div class="filter__search">
+      <input (input)="queryTask($event)" class="search__input" type="text" />
+    </div>
+  </div>
   <div class="tasks">
-    @if (todos.isLoading()) {
+    @if (tasks.isLoading()) {
       ...Loading data
     } @else {
-      @for (todo of todos.listFilter(); track todo.id) {
-        <app-task-card (markCancel)="todos.cancelTask(todo.id)" (markDone)="todos.doneTask(todo.id)"
-                       (restore)="todos.restoreTask(todo.id)" [description]='todo.description' [id]='todo.id'
-                       [state]="todo.state" [title]='todo.title'></app-task-card>
+      @for (todo of tasks.listFilter(); track todo.id) {
+        <app-task-card (markCancel)="tasks.todoTask(todo.id)" (markDone)="tasks.doneTask(todo.id)"
+                       (restore)="tasks.restoreTask(todo.id)" [description]='todo.description!' [id]='todo.id'
+                       [state]="todo.taskStatus" [title]='todo.title'></app-task-card>
       }
     }
   </div>

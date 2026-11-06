@@ -11,11 +11,13 @@ export interface Page<T> {
   page: number;
   size: number;
 }
+
 export type Article = 'der' | 'die' | 'das';
 export type Gender = 'masculine' | 'feminine' | 'neutral';
 export type WordType = 'Noun' | 'Verb' | 'Adjective' | 'Adverb' | 'Unknown';
 export type VocabState = 'DRAFT' | 'PENDING_FOR_REVIEW' | 'PUBLISHED' | 'DELETED';
 export type AuxiliaryVerb = 'haben' | 'sein';
+
 export interface VocabularyReadModel {
   id: string;
   german_word: string;
@@ -45,9 +47,4 @@ export interface Verb {
   is_separable: boolean;
 }
 
-export interface ToDoItem{
-  id: string;
-  title: string;
-  description: string;
-  state: 'done' | 'pending' | 'cancel' | string;
-}
+

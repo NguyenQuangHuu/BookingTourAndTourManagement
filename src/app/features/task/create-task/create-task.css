@@ -1,0 +1,123 @@
+.task-form {
+  padding: var(--space-6);
+  margin: 0 auto;
+  width: var(--space-128);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-4);
+}
+
+.form-body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+.span-1 {
+  grid-column: span 1;
+}
+
+.form-group {
+  margin-bottom: var(--space-2);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input[type='text'], input[type='password'], input[type='datetime-local'], select {
+  width: 100%;
+  padding: var(--space-1) var(--space-2);
+  box-sizing: border-box;
+}
+
+.form-title {
+  font-size: var(--text-xl);
+  font-weight: 500;
+}
+
+.radio-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.radio-custom {
+  cursor: pointer;
+}
+
+.radio-content {
+  height: 100%;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-1);
+  padding: var(--space-2);
+  color: var(--gray-500);
+}
+
+.radio-title {
+  font-size: var(--text-lg);
+  display: flex;
+  flex-direction: row;
+}
+
+.radio-title .radio-title_value {
+  flex: 1;
+}
+
+.radio-desc {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.radio-title_marked {
+  display: none;
+  width: var(--space-4);
+  height: var(--space-4);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-full);
+  background: var(--bg-color);
+  color: var(--accent);
+  margin: 0 auto;
+  align-items: baseline;
+  justify-content: center;
+  font-size: var(--text-sm)
+}
+
+.radio-custom input[type='radio']:checked + .radio-content .radio-title_marked {
+  display: flex;
+  box-shadow: var(--shadow-1);
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-custom input[type='radio'] {
+  display: none;
+}
+
+.radio-custom input[type='radio']:checked + .radio-content {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.form-select {
+  width: 100%;
+  padding: var(--space-2);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-1);
+  background-color: white;
+
+  /* Xóa giao diện mặc định */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
