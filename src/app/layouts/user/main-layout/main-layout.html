@@ -29,14 +29,19 @@
       <a href="#">Contact</a>
     </footer>
   </aside>
-  <main class="main-content">
-    <header class="navbar">
+  <main class="main-container">
+    <header class="main__header">
       <div class="search-input">
         <label>Tìm kiếm</label>
         <input placeholder="Nhập nội dung..." type="text" />
       </div>
+      <div>
+
+      </div>
     </header>
-    <router-outlet></router-outlet>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
     <footer class="content-footer">copyright 123</footer>
   </main>
 </div>

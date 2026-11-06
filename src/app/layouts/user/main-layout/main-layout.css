@@ -7,7 +7,7 @@
 
 .main-content {
   background-color: var(--bg-color);
-  over-flow-y: auto;
+  overflow-y: auto;
 }
 
 @media (max-width: 48rem) {
@@ -27,7 +27,7 @@
 .sidebar_logo {
   display: flex;
   align-items: center;
-  justify-content: baseline;
+  justify-content: center;
   margin-bottom: var(--space-4);
 }
 
@@ -44,7 +44,7 @@
 .app_name {
   font-size: var(--text-lg);
   font-weight: 700;
-  letter-spacing: -0.05;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -64,7 +64,7 @@
 
 .nav__group span {
   font-size: var(--text-xs);
-  color: var(--text-teriaty);
+  color: var(--text-tertiary);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -101,9 +101,20 @@
 
 
 .sidebar__footer {
+  display:flex;
+  flex-direction: column;
   font-family: inherit;
   font-size: var(--text-sm);
   color: var(--text-secondary);
   font-weight: 500;
 }
 
+.main-container{
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2);
+}
+
+.main-content{
+  flex-grow:1;
+}
