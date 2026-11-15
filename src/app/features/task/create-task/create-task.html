@@ -1,10 +1,12 @@
 <form (submit)="createTaskForm($event)" class="task-form" novalidate>
   <h2 class="form-title">Thêm công việc mới</h2>
   <div class="form-body">
+    <h3 class="group-title span-2">Chi tiết công việc</h3>
     <div
       class="form-group span-1">
-      <label class="form-label" for="task-name">Task</label>
-      <input class="from-control" id="task-name" name="taskName" placeholder="Học 10 từ vựng..." type="text" />
+      <label class="form-label" for="task-name">Công việc</label>
+      <input autofocus class="from-control" id="task-name" name="taskName" placeholder="Học 10 từ vựng..."
+             type="text" />
     </div>
     <div class="form-group span-1">
       <label class="form-label" for="task-description">Mô tả công việc</label>
@@ -27,14 +29,13 @@
       </select>
     </div>
     <div class="form-group span-2">
-      <h3 class="group-title">Mức độ ưu tiên</h3>
+      <h3 class="group-title">Độ ưu tiên</h3>
       <div class="radio-group">
         <label class="radio-custom">
           <input name="task_risk_level" type="radio" value="low">
           <div class="radio-content">
             <div class="radio-title">
-              <span class="radio-title_value">Thấp</span>
-              <span class="radio-title_marked">v</span>
+              Thấp
             </div>
             <p class="radio-desc">Mức độ ưu tiên thấp, có thể hoàn thành sau.</p>
           </div>
@@ -43,8 +44,7 @@
           <input name="task_risk_level" type="radio" value="medium">
           <div class="radio-content">
             <div class="radio-title">
-              <span class="radio-title_value">Vừa</span>
-              <span class="radio-title_marked">v</span>
+              Vừa
             </div>
             <p class="radio-desc">Mức độ ưu tiên vừa phải, nhưng cần hoàn thành.</p>
           </div>
@@ -53,8 +53,7 @@
           <input checked name="task_risk_level" type="radio" value="high">
           <div class="radio-content">
             <div class="radio-title">
-              <span class="radio-title_value">Cao</span>
-              <span class="radio-title_marked">v</span>
+              Cao
             </div>
             <p class="radio-desc">Mức độ ưu tiên cao, cần hoàn thành ngay.</p>
           </div>
@@ -63,10 +62,9 @@
 
     </div>
   </div>
-
-
   <div class="form-actions">
-    <button class="btn btn-secondary" type="button">Quay lại</button>
-    <button class="btn btn-primary" type="submit">Thêm công việc</button>
+    <button class="btn btn--tertiary" type="button" value="back">Quay lại</button>
+    <button class="btn btn--secondary" type="reset" value="reset_form">Xóa</button>
+    <button class="btn btn--primary" type="submit" value="submit_form">Thêm công việc</button>
   </div>
 </form>
