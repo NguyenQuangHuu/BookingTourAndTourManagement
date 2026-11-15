@@ -126,7 +126,11 @@ body {
   font-family: var(--font-sans), serif;
   background-color: var(--background-color);
 }
-
+label, legend, button, .no-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none;     /* IE 10 và IE 11 */
+  user-select: none;         /* Chuẩn chung (Chrome, Firefox, Edge, Opera) */
+}
 .table td {
   padding: 0.75rem;
 }

@@ -1,70 +1,81 @@
-<form (submit)="createTaskForm($event)" class="task-form" novalidate>
+<form class="task-form" novalidate [formRoot]="taskForm">
   <h2 class="form-title">Thêm công việc mới</h2>
-  <div class="form-body">
-    <h3 class="group-title span-2">Chi tiết công việc</h3>
-    <div
-      class="form-group span-1">
-      <label class="form-label" for="task-name">Công việc</label>
-      <input autofocus class="from-control" id="task-name" name="taskName" placeholder="Học 10 từ vựng..."
-             type="text" />
-    </div>
-    <div class="form-group span-1">
-      <label class="form-label" for="task-description">Mô tả công việc</label>
-      <input class="form-control" id="task-description" name="taskDescription"
-             placeholder="cần hoàn thành việc học 10 từ vựng trong ngày..."
-             type="text" />
-    </div>
-    <div class="form-group span-1">
-      <label class="form-label" for="task-due-date">Thời hạn</label>
-      <input id="task-due-date" name="taskDueDate" type="datetime-local">
-    </div>
-    <div class="form-group span-1">
-      <label class="form-label" for="task-assignment">
-        Phân công
-      </label>
-      <select class="form-select" id="task-assignment">
-        <option class="form-option" selected value="">---Phân công---
-        </option>
-        <option class="form-option" value="user-a">User-A</option>
-      </select>
-    </div>
-    <div class="form-group span-2">
-      <h3 class="group-title">Độ ưu tiên</h3>
-      <div class="radio-group">
-        <label class="radio-custom">
-          <input name="task_risk_level" type="radio" value="low">
-          <div class="radio-content">
-            <div class="radio-title">
-              Thấp
-            </div>
-            <p class="radio-desc">Mức độ ưu tiên thấp, có thể hoàn thành sau.</p>
-          </div>
-        </label>
-        <label class="radio-custom">
-          <input name="task_risk_level" type="radio" value="medium">
-          <div class="radio-content">
-            <div class="radio-title">
-              Vừa
-            </div>
-            <p class="radio-desc">Mức độ ưu tiên vừa phải, nhưng cần hoàn thành.</p>
-          </div>
-        </label>
-        <label class="radio-custom">
-          <input checked name="task_risk_level" type="radio" value="high">
-          <div class="radio-content">
-            <div class="radio-title">
-              Cao
-            </div>
-            <p class="radio-desc">Mức độ ưu tiên cao, cần hoàn thành ngay.</p>
-          </div>
-        </label>
+  <section class="">
+    <fieldset class="form-body">
+      <legend class="group-title">
+        Thông tin chung
+      </legend>
+      <div
+        class="form-group span-1">
+        <label class="form-label" for="task-name">Công việc</label>
+        <input autofocus class="from-control" id="task-name" [formField]="taskForm.taskName" placeholder="Học 10 từ vựng..."
+               type="text" />
+        @if(taskForm.taskName().touched() && taskForm.taskName().invalid()){
+          @for( t of taskForm.taskName().errors();track t ){
+            <span>{{t.kind}}</span>
+            <span>{{t.message}}</span>
+          }
+        }
       </div>
-
-    </div>
-  </div>
+      <div class="form-group span-1">
+        <label class="form-label" for="task-description">Mô tả công việc</label>
+        <input class="form-control" id="task-description" [formField]="taskForm.taskDescription"
+               placeholder="cần hoàn thành việc học 10 từ vựng trong ngày..."
+               type="text" />
+      </div>
+      <div class="form-group span-1">
+        <label class="form-label" for="task-due-date">Thời hạn</label>
+        <input id="task-due-date" [formField]="taskForm.taskDueDate" type="datetime-local">
+      </div>
+      <div class="form-group span-1">
+        <label class="form-label" for="task-assignment">
+          Phân công
+        </label>
+        <select class="form-select" id="task-assignment" [formField]="taskForm.taskAssignment">
+          <option class="form-option" selected value="">--Lựa chọn--
+          </option>
+          <option class="form-option" value="user-a">User-A</option>
+        </select>
+      </div>
+    </fieldset>
+    <fieldset class="form-body">
+      <legend class="group-title">Độ ưu tiên</legend>
+      <div class="form-group span-2">
+        <div class="radio-group">
+          <label class="radio-custom">
+            <input [formField]="taskForm.taskPriority" type="radio" value="LOW">
+            <div class="radio-content">
+              <div class="radio-title">
+                Thấp
+              </div>
+              <p class="radio-desc">Mức độ ưu tiên thấp, có thể hoàn thành sau.</p>
+            </div>
+          </label>
+          <label class="radio-custom">
+            <input  [formField]="taskForm.taskPriority" type="radio" value="MEDIUM">
+            <div class="radio-content">
+              <div class="radio-title">
+                Vừa
+              </div>
+              <p class="radio-desc">Mức độ ưu tiên vừa phải, nhưng cần hoàn thành.</p>
+            </div>
+          </label>
+          <label class="radio-custom">
+            <input  [formField]="taskForm.taskPriority" type="radio" value="HIGH">
+            <div class="radio-content">
+              <div class="radio-title">
+                Cao
+              </div>
+              <p class="radio-desc">Mức độ ưu tiên cao, cần hoàn thành ngay.</p>
+            </div>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </section>
   <div class="form-actions">
     <button class="btn btn--tertiary" type="button" value="back">Quay lại</button>
     <button class="btn btn--secondary" type="reset" value="reset_form">Xóa</button>
-    <button class="btn btn--primary" type="submit" value="submit_form">Thêm công việc</button>
+    <button class="btn btn--primary" type="submit" [disabled]="taskForm().submitting()" value="submit_form">Thêm công việc</button>
   </div>
 </form>
