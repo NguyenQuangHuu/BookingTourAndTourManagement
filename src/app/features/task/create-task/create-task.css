@@ -1,0 +1,215 @@
+/* ===== Thẻ form ===== */
+.task-form {
+  width: 100%;
+  max-width: var(--space-128); /* 512px: cố định, không lấp đầy màn hình */
+  margin: 0 auto;
+  padding: var(--space-6); /* 24px */
+  background: var(--surface);
+  border-radius: var(--radius-4); /* 12px: card */
+  box-shadow: var(--shadow-2);
+}
+
+.form-title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+/* ===== Lưới: field gần nhau trong cột, các hàng cách nhau rõ hơn ===== */
+.form-body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-4); /* dọc 24px, ngang 16px */
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Nhãn: yếu hơn giá trị, gần ô nhập của nó */
+.form-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2); /* 8px */
+}
+
+/* Tiêu đề nhóm: nhỏ, xám, không cạnh tranh với tiêu đề form */
+.group-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* ===== Ô nhập ===== */
+.form-group :is(input[type='text'], input[type='password'], input[type='datetime-local'], select) {
+  width: 100%;
+  height: var(--space-10, 2.5rem); /* 40px, cùng chiều cao với nút */
+  padding: var(--space-2) var(--space-3);
+  font: inherit;
+  font-size: var(--text-base); /* 16px: tránh iOS tự phóng to */
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--surface);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-inset);
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+  opacity: 1; /* Firefox làm mờ placeholder mặc định */
+}
+
+.form-group :is(input, select):focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--blue-100);
+}
+
+.form-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.form-select:has(option[value=""]:checked) {
+  color: var(--text-muted);
+}
+
+/* ===== Thẻ chọn độ ưu tiên ===== */
+.radio-group {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2); /* 8px */
+}
+
+.radio-custom {
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-custom input[type='radio'] {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-3);
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.radio-content {
+  height: 100%;
+  padding: var(--space-4) var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--border); /* 1px, không dày 2px */
+  border-radius: var(--radius-3);
+  transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.radio-title {
+  font-size: var(--text-base); /* tiêu đề thẻ chỉ bằng chữ thân, đậm hơn */
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.radio-desc {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm); /* 14px: mô tả đọc được, không quá nhỏ */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.radio-custom input[type='radio']:checked + .radio-content {
+  background: var(--blue-100);
+  border-color: var(--accent);
+}
+
+.radio-custom:hover .radio-content {
+  border-color: var(--border-input);
+}
+
+.radio-custom input[type='radio']:checked + .radio-content {
+  border-color: var(--accent);
+}
+
+/* ===== Hàng nút ===== */
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8); /* 32px: tách khỏi nội dung */
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  height: var(--space-10, 2.5rem); /* cùng chiều cao với ô nhập */
+  padding: 0 var(--space-4); /* 16px */
+  font: inherit;
+  font-size: var(--text-sm); /* 14px cho cả ba nút */
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: var(--radius-2);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+}
+
+/* Chính: một nút duy nhất trên form, có bóng mức 1 */
+.btn--primary {
+  margin-left: auto; /* đẩy sang phải */
+  color: var(--surface);
+  background: var(--accent);
+  box-shadow: var(--shadow-1);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--blue-700);
+}
+
+/* Phụ: viền mảnh, không bóng */
+.btn--secondary {
+  color: var(--text-primary);
+  background: var(--surface);
+  border-color: var(--border-input);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background: var(--gray-100);
+}
+
+/* Bậc ba: chỉ chữ, không nền, không viền, không bóng */
+.btn--tertiary {
+  color: var(--text-secondary);
+
+  background: transparent;
+}
+
+.btn--tertiary:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

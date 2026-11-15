@@ -2,12 +2,10 @@
   display: grid;
   grid-template-columns: 250px 1fr;
   min-height: 100vh;
-
 }
 
 .main-content {
-  background-color: var(--bg-color);
-  overflow-y: auto;
+
 }
 
 @media (max-width: 48rem) {
@@ -44,7 +42,7 @@
 .app_name {
   font-size: var(--text-lg);
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: -0.05em;
   text-transform: uppercase;
 }
 
@@ -64,7 +62,7 @@
 
 .nav__group span {
   font-size: var(--text-xs);
-  color: var(--text-tertiary);
+  color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -72,6 +70,8 @@
 }
 
 .nav__link {
+  display: flex; /* Thêm dòng này */
+  align-items: center; /* Căn giữa icon và chữ */
   gap: var(--space-3);
   color: var(--gray-700);
   font-weight: 500;
@@ -88,8 +88,8 @@
 }
 
 .nav__link--active {
-  background-color: var(--primary-50);
-  color: var(--primary-700);
+  background-color: var(--blue-500);
+  color: var(--blue-100);
   font-weight: 600;
   border: 1px solid transparent;
 }
@@ -101,20 +101,23 @@
 
 
 .sidebar__footer {
-  display:flex;
-  flex-direction: column;
   font-family: inherit;
   font-size: var(--text-sm);
   color: var(--text-secondary);
   font-weight: 500;
 }
 
-.main-container{
+
+.main-container {
+  background-color: var(--bg-color);
+  overflow: hidden;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: var(--space-2);
 }
 
-.main-content{
-  flex-grow:1;
+.main-content {
+  flex: 1; /* Tự động co giãn để lấp đầy khoảng trống */
+  overflow-y: auto; /* Chỉ cho phép cuộn phần này */
+  padding: var(--space-6); /* Thêm khoảng cách cho nội dung */
 }

@@ -2,14 +2,14 @@
   <aside class="sidebar">
     <div class="sidebar_logo">
       <div class="app_logo">
-        <img src="favicon.ico" />
+        <img alt="logo" height="48" ngSrc="favicon.ico" width="48" />
       </div>
       <h1 class="app_name">DeutschLearner</h1>
     </div>
     <nav class="sidebar__nav">
       <div class="nav__group">
         <span class="nav__title">Overview</span>
-        <a class="nav__link nav__link--active" href="#">
+        <a class="nav__link" routerLink="/task" routerLinkActive="nav__link--active">
           <span class="nav__icon">i</span>
           Thống kê
         </a>
@@ -23,20 +23,17 @@
       </div>
 
     </nav>
-    <footer class="sidebar__footer">
-      <a href="#">Setting</a>
-      <a href="#">Help</a>
-      <a href="#">Contact</a>
+    <footer class="sidebar__footer nav__group">
+      <a class="nav__link" href="#">Setting</a>
+      <a class="nav__link" href="#">Help</a>
+      <a class="nav__link" href="#">Contact</a>
     </footer>
   </aside>
   <main class="main-container">
-    <header class="main__header">
+    <header class="navbar">
       <div class="search-input">
         <label>Tìm kiếm</label>
         <input placeholder="Nhập nội dung..." type="text" />
-      </div>
-      <div>
-
       </div>
     </header>
     <div class="main-content">

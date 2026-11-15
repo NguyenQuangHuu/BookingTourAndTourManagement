@@ -1,23 +1,25 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TaskCard } from '../../components/task-card/task-card';
-import { TasksStore } from '../../core/tasks.store';
+import { TaskStore } from '../../core/tasks.store';
+import { AppButton } from '../../components/button/button';
 
 @Component({
   selector: 'app-landing-page',
   imports: [
-    TaskCard
+    TaskCard,
+    AppButton
   ],
-  providers: [TasksStore],
+  providers: [TaskStore],
   templateUrl: './landing-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './landing-page.css'
 })
 export class LandingPage {
-  todos = inject(TasksStore);
+  tasks = inject(TaskStore);
 
-  updateQuery(e: Event) {
+  queryTask(e: Event) {
     const inputValue = e.target as HTMLInputElement;
     console.log(inputValue.value);
-    this.todos.setQuerySearch(inputValue.value);
+    this.tasks.setQuerySearch(inputValue.value);
   }
 }
