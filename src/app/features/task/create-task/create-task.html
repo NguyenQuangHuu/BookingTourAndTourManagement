@@ -1,4 +1,4 @@
-<form class="task-form" novalidate [formRoot]="taskForm">
+<form [formRoot]="taskForm" class="task-form" novalidate>
   <h2 class="form-title">Thêm công việc mới</h2>
   <section class="">
     <fieldset class="form-body">
@@ -8,34 +8,57 @@
       <div
         class="form-group span-1">
         <label class="form-label" for="task-name">Công việc</label>
-        <input autofocus class="from-control" id="task-name" [formField]="taskForm.taskName" placeholder="Học 10 từ vựng..."
+        <input [formField]="taskForm.taskName" autofocus class="from-control" id="task-name"
+               placeholder="Học 10 từ vựng..."
                type="text" />
-        @if(taskForm.taskName().touched() && taskForm.taskName().invalid()){
-          @for( t of taskForm.taskName().errors();track t ){
-            <span>{{t.kind}}</span>
-            <span>{{t.message}}</span>
+        @if (taskForm.taskName().touched() && taskForm.taskName().invalid()) {
+          @if (taskForm.taskName().errors(); as t) {
+            <span class="error--message">{{ t[0].message }}</span>
           }
+        } @else {
+          <span class="hint--message">hint</span>
         }
       </div>
       <div class="form-group span-1">
         <label class="form-label" for="task-description">Mô tả công việc</label>
-        <input class="form-control" id="task-description" [formField]="taskForm.taskDescription"
+        <input [formField]="taskForm.taskDescription" class="form-control" id="task-description"
                placeholder="cần hoàn thành việc học 10 từ vựng trong ngày..."
                type="text" />
+        @if (taskForm.taskDescription().touched() && taskForm.taskDescription().invalid()) {
+          @if (taskForm.taskDescription().errors(); as t) {
+            <span class="error--message">{{ t[0].message }}</span>
+          }
+        } @else {
+          <span class="hint--message">hint</span>
+        }
       </div>
       <div class="form-group span-1">
         <label class="form-label" for="task-due-date">Thời hạn</label>
-        <input id="task-due-date" [formField]="taskForm.taskDueDate" type="datetime-local">
+        <input [formField]="taskForm.taskDueDate" id="task-due-date" type="datetime-local">
+        @if (taskForm.taskDueDate().touched() && taskForm.taskDueDate().invalid()) {
+          @if (taskForm.taskDueDate().errors(); as t) {
+            <span class="error--message">{{ t[0].message }}</span>
+          }
+        } @else {
+          <span class="hint--message">hint</span>
+        }
       </div>
       <div class="form-group span-1">
         <label class="form-label" for="task-assignment">
           Phân công
         </label>
-        <select class="form-select" id="task-assignment" [formField]="taskForm.taskAssignment">
+        <select [formField]="taskForm.taskAssignment" class="form-select" id="task-assignment">
           <option class="form-option" selected value="">--Lựa chọn--
           </option>
           <option class="form-option" value="user-a">User-A</option>
         </select>
+        @if (taskForm.taskAssignment().touched() && taskForm.taskAssignment().invalid()) {
+          @if (taskForm.taskAssignment().errors(); as t) {
+            <span class="error--message">{{ t[0].message }}</span>
+          }
+        } @else {
+          <span class="hint--message">hint</span>
+        }
       </div>
     </fieldset>
     <fieldset class="form-body">
@@ -52,7 +75,7 @@
             </div>
           </label>
           <label class="radio-custom">
-            <input  [formField]="taskForm.taskPriority" type="radio" value="MEDIUM">
+            <input [formField]="taskForm.taskPriority" type="radio" value="MEDIUM">
             <div class="radio-content">
               <div class="radio-title">
                 Vừa
@@ -61,7 +84,7 @@
             </div>
           </label>
           <label class="radio-custom">
-            <input  [formField]="taskForm.taskPriority" type="radio" value="HIGH">
+            <input [formField]="taskForm.taskPriority" type="radio" value="HIGH">
             <div class="radio-content">
               <div class="radio-title">
                 Cao
@@ -71,11 +94,20 @@
           </label>
         </div>
       </div>
+      @if (taskForm.taskPriority().touched() && taskForm.taskPriority().invalid()) {
+        @if (taskForm.taskPriority().errors(); as t) {
+          <span class="error--message">{{ t[0].message }}</span>
+        }
+      } @else {
+        <span class="hint--message">hint</span>
+      }
     </fieldset>
   </section>
   <div class="form-actions">
     <button class="btn btn--tertiary" type="button" value="back">Quay lại</button>
     <button class="btn btn--secondary" type="reset" value="reset_form">Xóa</button>
-    <button class="btn btn--primary" type="submit" [disabled]="taskForm().submitting()" value="submit_form">Thêm công việc</button>
+    <button [disabled]="taskForm().submitting()" class="btn btn--primary" type="submit" value="submit_form">Thêm công
+      việc
+    </button>
   </div>
 </form>
