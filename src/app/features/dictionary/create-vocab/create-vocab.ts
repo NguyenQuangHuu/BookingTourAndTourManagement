@@ -1,33 +1,40 @@
-import {Component, signal} from '@angular/core';
-import {form, FormField, minLength, required, submit} from '@angular/forms/signals';
+import { Component, signal } from '@angular/core';
+import { form, FormField, minLength, required, submit } from '@angular/forms/signals';
+import { VocabState, WordType } from '../../../core/dictionary.model';
 
 @Component({
   imports: [FormField],
   selector: 'app-create-vocab',
   styleUrl: './create-vocab.css',
   templateUrl: './create-vocab.html',
-  standalone: true,
+  standalone: true
 })
 export class CreateVocab {
-  private readonly createVocabModel = signal<CreateVocabData>({
-    german_word:''
-  })
-  createForm = form(this.createVocabModel, path =>{
-    required(path.german_word,{message:'không được để trống'});
-    minLength(path.german_word,2,{message:'độ dài tối thiểu là 2'})
-  })
+  private readonly createVocabModel = signal<CreateVocabFormData>({
+    german_word: '',
+    word_type: null,
+    state: 'DRAFT',
+    tags: [] as string[]
+  });
+  createForm = form(this.createVocabModel, path => {
+    required(path.german_word, { message: 'không được để trống' });
+    minLength(path.german_word, 2, { message: 'độ dài tối thiểu là 2' });
+  });
 
-  onSubmit(e :Event){
+  onSubmit(e: Event) {
     e.preventDefault();
-    submit(this.createForm,{
-      action: async ()=>{
+    submit(this.createForm, {
+      action: async () => {
         const values = this.createVocabModel();
-        console.log(values)
+        console.log(values);
       }
-    })
+    });
   }
 }
 
-interface CreateVocabData {
-  german_word:string
+interface CreateVocabFormData {
+  german_word: string;
+  word_type: WordType | null;
+  state: VocabState;
+  tags: string[];
 }

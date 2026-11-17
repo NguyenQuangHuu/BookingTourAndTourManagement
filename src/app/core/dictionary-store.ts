@@ -1,9 +1,10 @@
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
-import { Noun, VocabState, VocabularyReadModel, WordType } from './models';
+import { VocabState, VocabularyReadModel, WordType } from './dictionary.model';
 import { computed, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
+import { DictionaryApi } from './dictionary-api.service.';
+
 
 const KEY_VOCABS_LS = 'german-word.vocabs';
 
@@ -18,7 +19,7 @@ function loadData(): VocabularyReadModel[] {
 type vocabularyState = {
   vocabs: VocabularyReadModel[];
   searchQuery: string;
-  filterVocab: 'asc' | 'desc';
+  sortBy: 'asc' | 'desc';
   selectedState: 'ALL' | VocabState;
   selectedWordType: WordType | 'ALL';
   isLoading: boolean;
@@ -27,7 +28,7 @@ type vocabularyState = {
 const initVocabState: vocabularyState = {
   vocabs: [] as VocabularyReadModel[],
   searchQuery: '',
-  filterVocab: 'asc',
+  sortBy: 'asc',
   selectedState: 'ALL',
   selectedWordType: 'ALL',
   isLoading: false,
@@ -36,22 +37,29 @@ const initVocabState: vocabularyState = {
 
 const VocabularyStore = signalStore(
   withState(initVocabState),
-  withComputed(({ vocabs, filterVocab, searchQuery, selectedState }) => ({
+  withComputed(({ vocabs, searchQuery, selectedState }) => ({
     vocabCount: computed(() => vocabs().length),
     draftCount: computed(() => vocabs().filter((x) => x.state === 'DRAFT').length),
     reviewsCount: computed(() => vocabs().filter((x) => x.state === 'PENDING_FOR_REVIEW').length)
     ,
     publishCount: computed(() => vocabs().filter((x) => x.state === 'PUBLISHED').length),
     genderStats: computed(() => {
-      const nouns = vocabs().filter((x) => x.word_type === 'Noun' && x.detail);
+      const nouns = vocabs().filter((x) => x.word_type === 'Noun' && !!x.detail);
       return {
         der: nouns.filter(v => 'gender' in v.detail! && v.detail.gender === 'masculine').length,
         die: nouns.filter(v => 'gender' in v.detail! && v.detail.gender === 'masculine').length,
         das: nouns.filter(v => 'gender' in v.detail! && v.detail.gender === 'neutral').length
       };
+    }),
+    filterVocabs: computed(() => {
+      return vocabs().filter((v) => {
+        const choiceState = selectedState() === 'ALL' || v.state === selectedState();
+        const q = searchQuery().trim();
+        return choiceState && (v.german_word.includes(q) || v.state.includes(q) || v.word_type?.toString().includes(q));
+      });
     })
   })),
-  withMethods((store, http = inject(HttpClient)) => ({
+  withMethods((store, service = inject(DictionaryApi)) => ({
     setSearchQuery(query: string) {
       patchState(store, { searchQuery: query });
     },
@@ -61,17 +69,26 @@ const VocabularyStore = signalStore(
     loadVocabs: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
-        switchMap(() => http.get<{ data: VocabularyReadModel[] }>('/v1/api/dictionary')),
-        tap({
-          next: (res) => patchState(store, { vocabs: res.data, isLoading: false }),
-          error: (err) => patchState(store, { error: err.message, isLoading: false })
-        })
+        switchMap(() => service.loadData().pipe(
+          tap({
+            next: (res) => {
+              const items = res.data?.items;
+              localStorage.setItem(KEY_VOCABS_LS, JSON.stringify(items));
+              patchState(store, { vocabs: items, isLoading: false });
+            },
+            error: (err) => patchState(store, { error: err.message, isLoading: false })
+          })
+        ))
       )
     )
   })),
   withHooks({
     onInit(store) {
-      store.loadVocabs();
+      const cached = loadData();
+      if (cached.length == 0) {
+        store.loadVocabs();
+      }
+      patchState(store, { vocabs: cached });
     }
   })
 );

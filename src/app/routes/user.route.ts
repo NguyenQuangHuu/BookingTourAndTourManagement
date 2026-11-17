@@ -11,5 +11,9 @@ export const userRoute: Routes = [{
   path: 'task',
   loadComponent: () => import('../features/task/create-task/create-task').then((t) => t.CreateTask),
   title: 'Add Task'
+}, {
+  path: 'vocabulary',
+  loadComponent: () => import('../features/dictionary/list-page/list-page').then((t) => t.ListPage),
+  title: 'Vocabulary list page'
 }
 ];

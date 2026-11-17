@@ -14,22 +14,34 @@ export interface Page<T> {
 
 export type Article = 'der' | 'die' | 'das';
 export type Gender = 'masculine' | 'feminine' | 'neutral';
-export type WordType = 'Noun' | 'Verb' | 'Adjective' | 'Adverb' | 'Unknown';
+export type WordType = 'Noun' | 'Verb' | 'Adjective' | 'Adverb';
 export type VocabState = 'DRAFT' | 'PENDING_FOR_REVIEW' | 'PUBLISHED' | 'DELETED';
 export type AuxiliaryVerb = 'haben' | 'sein';
 
 export interface VocabularyReadModel {
   id: string;
   german_word: string;
-  word_type: WordType;
+  meanings: VocabularyMeaning[];
+  word_type: WordType | null;
   state: VocabState;
-  detail: Noun | Verb | null;
+  detail: NounData | VerbData | AdjectiveData | AdverbData | null;
   tags: string[];
   created_at: string;
   updated_at?: string;
 }
 
-export interface Noun {
+export interface VocabularyMeaning {
+  meaning_vie: string;
+  following_context: string;
+  examples: VocabularyExample[];
+}
+
+export interface VocabularyExample {
+  content: string;
+  translate: string;
+}
+
+export interface NounData {
   plural: string;
   article: Article;
   gender: Gender;
@@ -39,7 +51,7 @@ export interface Noun {
   is_singular_only: boolean;
 }
 
-export interface Verb {
+export interface VerbData {
   present_third_person: string;
   past_simple: string;
   past_participle: string;
@@ -47,4 +59,11 @@ export interface Verb {
   is_separable: boolean;
 }
 
+export interface AdjectiveData {
+
+}
+
+export interface AdverbData {
+
+}
 

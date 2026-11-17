@@ -126,23 +126,10 @@ body {
   font-family: var(--font-sans), serif;
   background-color: var(--background-color);
 }
+
 label, legend, button, .no-select {
   -webkit-user-select: none; /* Safari */
-  -ms-user-select: none;     /* IE 10 và IE 11 */
-  user-select: none;         /* Chuẩn chung (Chrome, Firefox, Edge, Opera) */
-}
-.table td {
-  padding: 0.75rem;
+  -ms-user-select: none; /* IE 10 và IE 11 */
+  user-select: none; /* Chuẩn chung (Chrome, Firefox, Edge, Opera) */
 }
 
-.table tbody tr:nth-child(odd) td {
-  background: var(--gray-100);
-}
-
-.table tbody td:first-child {
-  border-radius: 0.5rem 0 0 0.5rem;
-}
-
-.table tbody td:last-child {
-  border-radius: 0 0.5rem 0.5rem 0;
-}
