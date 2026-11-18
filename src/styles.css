@@ -4,115 +4,206 @@
 
 
 :root {
+  /* ==========================================
+     TẦNG 1: PRIMITIVE TOKENS (THANG ĐO CƠ SỞ)
+     ========================================== */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /*màu nền*/
-  --background-color: hsl(210, 20%, 98%);
-  --surface-color: hsl(0, 0%, 100%);
-  /*khoảng cách*/
-  --space-1: 0.25rem; /* 4px : khoảng cách nhỏ giữa tiêu đề chính và phụ */
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem; /* 16px */
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-32: 8rem;
-  --space-48: 12rem;
-  --space-64: 16rem;
-  --space-128: 32rem;
-  --space-192: 48rem;
-  --space-256: 64rem;
-  --space-384: 96rem;
-  --space-512: 128rem;
-  /*bo góc*/
-  --radius-1: 0.25rem; /*4px*/
-  --radius-2: 0.375rem; /*6px*/
-  --radius-3: 0.5rem; /*8px*/
-  --radius-4: 0.75rem;
-  --radius-5: 0.875rem;
-  --radius-6: 1rem;
-  --radius-full: 9999px;
-  /*  font chữ */
-  --font-xs: 0.75rem;
-  --font-sm: 0.875rem;
-  --font-base: 1rem;
-  --font-lg: 1.125rem;
-  --font-xl: 1.25rem;
-  --font-2xl: 1.5rem;
-  /* Alias cỡ chữ: dùng một tên duy nhất (--text-*) cho cả dự án */
-  --text-xs: var(--font-xs); /* 12px: gợi ý */
-  --text-sm: var(--font-sm); /* 14px: nhãn, nút */
-  --text-base: var(--font-base); /* 16px: chữ nhập, thân */
-  --text-xl: var(--font-xl); /* 20px: tiêu đề form */
-  /* Xám: pha xanh lạnh, saturation tăng ở hai đầu */
-  --gray-100: hsl(220, 20%, 97%);
-  --gray-200: hsl(220, 16%, 93%);
-  --gray-300: hsl(220, 14%, 86%);
-  --gray-400: hsl(220, 12%, 72%);
+  /* Cỡ chữ (Font Size) - Đổi sang tiền tố --fs-* để không đụng độ màu chữ */
+  --fs-xs: 0.75rem;     /* 12px: Nhãn phụ, badge, chú thích bảng */
+  --fs-sm: 0.875rem;    /* 14px: Nhãn form, nút bấm, nội dung bảng */
+  --fs-base: 1rem;      /* 16px: Ô nhập liệu (tránh iOS zoom), văn bản chính */
+  --fs-lg: 1.125rem;    /* 18px: Tiêu đề thẻ, đoạn dẫn */
+  --fs-xl: 1.25rem;     /* 20px: Tiêu đề form, tiêu đề modal */
+  --fs-2xl: 1.5rem;     /* 24px: Tiêu đề khu vực (Section) */
+  --fs-3xl: 1.875rem;   /* 30px: Tiêu đề trang, con số thống kê KPI */
+
+  /* Độ đậm (Font Weight) & Chiều cao dòng (Line Height) */
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --lh-tight: 1.2;      /* Dành cho tiêu đề lớn (--fs-xl trở lên) */
+  --lh-snug: 1.375;     /* Dành cho tiêu đề thẻ, nhãn ngắn */
+  --lh-normal: 1.5;     /* Chuẩn mặc định cho giao diện */
+  --lh-relaxed: 1.625;  /* Dành cho đoạn văn dài */
+
+  /* Thang khoảng cách (Spacing - Dùng cho padding, margin, gap) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-1-5: 0.375rem;/* 6px: Khoảng đệm dọc cho nút nhỏ/badge */
+  --space-2: 0.5rem;    /* 8px */
+  --space-2-5: 0.625rem;/* 10px: Khoảng đệm dọc chuẩn cho input/button */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px: Padding thẻ vừa */
+  --space-6: 1.5rem;    /* 24px: Padding thẻ lớn / modal */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+
+  /* Thang kích thước khung (Layout & Container Sizing - Tách khỏi --space-*) */
+  --width-prose: 65ch;  /* Giới hạn 45-75 ký tự/dòng cho văn bản đọc */
+  --width-xs: 20rem;    /* 320px: Hộp thoại nhỏ, dropdown */
+  --width-sm: 24rem;    /* 384px: Form đăng nhập, thẻ KPI */
+  --width-md: 28rem;    /* 448px: Modal tiêu chuẩn */
+  --width-lg: 36rem;    /* 576px: Form nhập liệu 1 cột */
+  --width-xl: 48rem;    /* 768px: Khung nội dung hẹp */
+  --width-2xl: 64rem;   /* 1024px: Bảng dữ liệu vừa */
+  --width-full: 80rem;  /* 1280px: Khung trang Dashboard tối đa */
+
+  /* Bo góc (Border Radius) */
+  --radius-1: 0.25rem;  /* 4px: Checkbox, badge nhỏ */
+  --radius-2: 0.375rem; /* 6px: Input, button tiêu chuẩn */
+  --radius-3: 0.5rem;   /* 8px: Card, dropdown, alert */
+  --radius-4: 0.75rem;  /* 12px: Modal, panel lớn */
+  --radius-full: 9999px;/* Pill badge, avatar */
+
+  /* Bảng màu Xám Lạnh (Cool Grey) - Bổ sung mức 50 làm nền trang cực dịu */
+  --white: hsl(0, 0%, 100%);
+  --gray-50: hsl(220, 25%, 98%);
+  --gray-100: hsl(220, 20%, 96%);
+  --gray-200: hsl(220, 16%, 91%);
+  --gray-300: hsl(220, 14%, 84%);
+  --gray-400: hsl(220, 12%, 70%);
   --gray-500: hsl(220, 10%, 52%);
-  --gray-600: hsl(220, 11%, 42%);
-  --gray-700: hsl(220, 14%, 31%);
+  --gray-600: hsl(220, 12%, 42%);
+  --gray-700: hsl(220, 15%, 30%);
   --gray-800: hsl(220, 20%, 20%);
   --gray-900: hsl(220, 28%, 12%);
 
-  --color-white: #ffffff;
-  /* Màu chủ đạo */
+  /* Màu chủ đạo (Blue) - Bổ sung 200 và 600 */
   --blue-100: hsl(221, 90%, 96%);
-  --blue-300: hsl(221, 88%, 80%);
+  --blue-200: hsl(221, 88%, 88%);
+  --blue-300: hsl(221, 86%, 78%);
   --blue-500: hsl(221, 83%, 53%);
-  --blue-700: hsl(221, 72%, 38%);
+  --blue-600: hsl(221, 78%, 46%); /* Trạng thái :hover mượt mà */
+  --blue-700: hsl(221, 72%, 38%); /* Trạng thái :active */
   --blue-900: hsl(221, 62%, 22%);
-  /* (bổ sung 200, 400, 600, 800 khi cần) */
 
-  /* Accent: 5 mức mỗi màu */
-  --red-100: hsl(0, 86%, 97%);
+  /* Màu ngữ nghĩa (Red, Amber, Green) - Chuẩn hóa 5 nấc 100, 300, 500, 700, 900 */
+  --red-100: hsl(0, 86%, 96%);
+  --red-300: hsl(0, 80%, 82%);
   --red-500: hsl(0, 72%, 51%);
+  --red-600: hsl(0, 74%, 44%);
   --red-700: hsl(0, 74%, 36%);
   --red-900: hsl(0, 80%, 20%);
-  --amber-100: hsl(45, 100%, 94%);
-  --amber-500: hsl(45, 80%, 50%);
-  --amber-700: hsl(45, 50%, 45%);
-  --amber-900: hsl(28, 80%, 18%);
-  --green-100: hsl(142, 70%, 95%);
-  --green-300: hsl(142, 60%, 75%);
-  --green-700: hsl(142, 76%, 25%);
-  --green-900: hsl(142, 75%, 20%);
 
+  --amber-100: hsl(45, 100%, 94%);
+  --amber-300: hsl(42, 95%, 76%);
+  --amber-500: hsl(38, 92%, 50%);
+  --amber-700: hsl(32, 85%, 32%); /* Đã xoay Hue về 32 để chữ sắc nét trên nền sáng */
+  --amber-900: hsl(26, 80%, 18%);
+
+  --green-100: hsl(142, 70%, 94%);
+  --green-300: hsl(142, 65%, 76%);
+  --green-500: hsl(142, 70%, 40%);
+  --green-700: hsl(142, 76%, 26%);
+  --green-900: hsl(142, 75%, 16%);
+
+  /* Hệ thống bóng đổ 5 cấp độ + Inset + Focus Ring */
+  --shadow-1: 0 1px 2px 0 rgba(18, 26, 38, 0.06);
+  --shadow-2: 0 1px 3px 0 rgba(18, 26, 38, 0.10), 0 1px 2px -1px rgba(18, 26, 38, 0.06);
+  --shadow-3: 0 4px 6px -1px rgba(18, 26, 38, 0.10), 0 2px 4px -2px rgba(18, 26, 38, 0.06);
+  --shadow-4: 0 10px 15px -3px rgba(18, 26, 38, 0.10), 0 4px 6px -4px rgba(18, 26, 38, 0.05);
+  --shadow-5: 0 20px 25px -5px rgba(18, 26, 38, 0.12), 0 8px 10px -6px rgba(18, 26, 38, 0.05);
+  --shadow-inset: inset 0 1px 2px 0 rgba(18, 26, 38, 0.07);
+
+  /* ==========================================
+     TẦNG 2: SEMANTIC & COMPONENT TOKENS
+     ========================================== */
+  /* Nền & Văn bản chung */
+  --bg-page: var(--gray-50);
+  --bg-surface: var(--white);
+  --bg-subtle: var(--gray-100);
   --text-primary: var(--gray-900);
   --text-secondary: var(--gray-700);
-  --text-muted: var(--gray-600); /* không dùng gray-500: chỉ khoảng 4:1, trượt cho chữ nhỏ */
+  --text-muted: var(--gray-600);
+  --border-subtle: var(--gray-200);
+  --border-default: var(--gray-300);
 
-  --border: var(--gray-300); /* đường kẻ trang trí */
-  --border-input: var(--gray-500); /* viền ô nhập: cần 3:1 */
+  /* Vòng sáng Focus (Focus Ring chuẩn truy cập bàn phím) */
+  --ring-primary: 0 0 0 3px var(--blue-200);
+  --ring-danger: 0 0 0 3px var(--red-300);
 
-  --accent: var(--blue-500);
-  --link: var(--blue-700);
-  --danger: var(--red-700);
+  /* 1. Biến cho BUTTON */
+  --btn-radius: var(--radius-2);
+  --btn-fs: var(--fs-sm);
+  --btn-fw: var(--fw-semibold);
+  --btn-py: var(--space-2-5);
+  --btn-px: var(--space-4);
+  --btn-shadow: var(--shadow-1);
 
-  --shadow-1: 0 1px 2px 0 rgba(22, 28, 39, 0.08),
-  0 2px 3px 0 rgba(22, 28, 39, 0.05);
-  --shadow-2: 0 1px 3px 0 rgba(22, 28, 39, 0.10),
-  0 1px 2px 0 rgba(22, 28, 39, 0.06);
-  --shadow-3: 0 4px 6px -1px rgba(22, 28, 39, 0.10),
-  0 2px 4px -1px rgba(22, 28, 39, 0.06);
-  --shadow-4: 0 10px 15px -3px rgba(22, 28, 39, 0.10),
-  0 4px 6px -2px rgba(22, 28, 39, 0.05);
-  --shadow-5: 0 20px 25px -5px rgba(22, 28, 39, 0.10),
-  0 10px 10px -5px rgba(22, 28, 39, 0.04);
-  --shadow-inset: inset 0 1px 2px 0 rgba(22, 28, 39, 0.08);
-  --surface: hsl(0, 0%, 100%);
+  --btn-primary-bg: var(--blue-500);
+  --btn-primary-bg-hover: var(--blue-600);
+  --btn-primary-bg-active: var(--blue-700);
+  --btn-primary-text: var(--white);
 
-  /* Bóng cho ô nhập: thay --shadow-4 */
+  --btn-secondary-bg: var(--white);
+  --btn-secondary-bg-hover: var(--gray-50);
+  --btn-secondary-bg-active: var(--gray-100);
+  --btn-secondary-text: var(--gray-700);
+  --btn-secondary-border: var(--gray-300);
+
+  --btn-danger-bg: var(--red-500);
+  --btn-danger-bg-hover: var(--red-600);
+  --btn-danger-bg-active: var(--red-700);
+
+  /* 2. Biến cho INPUT / SELECT / TEXTAREA */
+  --input-bg: var(--white);
+  --input-bg-disabled: var(--gray-100);
+  --input-text: var(--gray-900);
+  --input-placeholder: var(--gray-500);
+  --input-border: var(--gray-400);        /* Nhẹ hơn gray-500 một chút vì đã có shadow-inset hỗ trợ tạo khối */
+  --input-border-hover: var(--gray-500);
+  --input-border-focus: var(--blue-500);
+  --input-border-error: var(--red-500);
+  --input-radius: var(--radius-2);
+  --input-py: var(--space-2);             /* 8px + line-height 24px + border 2px = cao đúng 42px */
+  --input-px: var(--space-3);             /* 12px */
+  --input-shadow: var(--shadow-inset);
+
+  /* 3. Biến cho CARD & PANEL */
+  --card-bg: var(--white);
+  --card-footer-bg: var(--gray-50);       /* Tách biệt chân thẻ bằng màu nền thay vì đường kẻ */
+  --card-radius: var(--radius-3);
+  --card-padding: var(--space-6);
+  --card-shadow: var(--shadow-2);
+  --card-border: var(--gray-200);
 }
 
-*, *:before, *:after {
+/* ==========================================
+   BASE RESET CHUẨN REFACTORING UI
+   ========================================== */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Bắt buộc các phần tử biểu mẫu kế thừa phông chữ từ body */
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+
+/*label, legend, button, .no-select {*/
+/*  -webkit-user-select: none; !* Safari *!*/
+/*  -ms-user-select: none; !* IE 10 và IE 11 *!*/
+/*  user-select: none; !* Chuẩn chung (Chrome, Firefox, Edge, Opera) *!*/
+/*}*/
 
 /*::view-transition-old(root) {*/
 /*  animation: fade-out 0.5s;*/
@@ -121,15 +212,384 @@
 /*::view-transition-new(root) {*/
 /*  animation: slide-in 0.5s;*/
 /*}*/
+/*BUTTON & LINK
+Nguyên tắc từ sách: Phân cấp theo trọng lượng thị giác.
+ Nút chính (Primary) dùng nền đặc tương phản cao kèm bóng nhẹ;
+  nút phụ (Secondary) dùng nền trắng, viền mảnh và bóng nhẹ để tạo cảm giác nổi lên khỏi mặt phẳng;
+   nút cấp ba (Ghost/Tertiary) bỏ hoàn toàn nền và viền, chỉ hiện nền xám nhạt khi di chuột vào.
+*/
 
-body {
-  font-family: var(--font-sans), serif;
-  background-color: var(--background-color);
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--btn-py) var(--btn-px);
+  font-size: var(--btn-fs);
+  font-weight: var(--btn-fw);
+  line-height: 1.25rem; /* Cố định 20px để đồng nhất chiều cao với nút có icon */
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
 }
 
-label, legend, button, .no-select {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 và IE 11 */
-  user-select: none; /* Chuẩn chung (Chrome, Firefox, Edge, Opera) */
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-primary);
 }
 
+.btn:active:not(:disabled) {
+  transform: translateY(1px); /* Hiệu ứng nhấn vật lý */
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Primary: Hành động chính duy nhất trên một khu vực */
+.btn--primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  box-shadow: var(--btn-shadow);
+}
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--btn-primary-bg-hover);
+}
+.btn--primary:active:not(:disabled) {
+  background-color: var(--btn-primary-bg-active);
+}
+
+/* Secondary: Hành động phụ đứng cạnh nút chính */
+.btn--secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border-color: var(--btn-secondary-border);
+  box-shadow: var(--btn-shadow);
+}
+.btn--secondary:hover:not(:disabled) {
+  background-color: var(--btn-secondary-bg-hover);
+  border-color: var(--gray-400);
+}
+.btn--secondary:active:not(:disabled) {
+  background-color: var(--btn-secondary-bg-active);
+}
+
+/* Tertiary / Ghost: Hành động hủy bỏ hoặc ít quan trọng */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+.btn--ghost:hover:not(:disabled) {
+  background-color: var(--gray-200);
+  color: var(--text-primary);
+}
+
+/* Destructive: Hành động xóa dữ liệu (Nên kết hợp với Secondary ở màn hình chính và chỉ dùng màu đặc này trong Modal xác nhận) */
+.btn--danger {
+  background-color: var(--btn-danger-bg);
+  color: var(--white);
+  box-shadow: var(--btn-shadow);
+}
+.btn--danger:hover:not(:disabled) {
+  background-color: var(--btn-danger-bg-hover);
+}
+.btn--danger:focus-visible {
+  box-shadow: var(--ring-danger);
+}
+
+/*FORM
+Nguyên tắc từ sách:
+ Ô nhập liệu cần có cảm giác "lõm" xuống mặt phẳng bằng box-shadow: var(--shadow-inset).
+  Khoảng cách giữa nhãn (.field__label) và ô nhập (.input) phải nhỏ (--space-1-5 hoặc --space-2) để tạo sự gắn kết,
+   trong khi khoảng cách giữa các cụm .field với nhau phải lớn gấp 3 lần (--space-5 hoặc --space-6).
+    Không làm xê dịch bố cục khi báo lỗi.
+
+*/
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+}
+
+.field__label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+/* Gợi ý phụ đặt ngay cạnh label (ví dụ: "Tùy chọn") dùng chữ nhỏ và nhạt hơn */
+.field__optional {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-normal);
+  color: var(--text-muted);
+  margin-left: var(--space-1);
+}
+
+.input {
+  width: 100%;
+  padding: var(--input-py) var(--input-px);
+  font-size: var(--fs-base);
+  line-height: 1.5rem; /* 24px */
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  box-shadow: var(--input-shadow);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.input:hover:not(:disabled):not(:focus) {
+  border-color: var(--input-border-hover);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  /* Gộp vòng sáng focus và bóng lõm bên trong */
+  box-shadow: var(--ring-primary), var(--input-shadow);
+}
+
+.input:disabled {
+  background-color: var(--input-bg-disabled);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Trạng thái lỗi: kích hoạt tự động qua :user-invalid hoặc class .input--error */
+.input:user-invalid,
+.input--error {
+  border-color: var(--input-border-error);
+  background-color: var(--red-100); /* Phủ nhẹ sắc đỏ pastel giúp nhận diện ngay cả khi mù màu */
+}
+
+.input:user-invalid:focus,
+.input--error:focus {
+  box-shadow: var(--ring-danger), var(--input-shadow);
+}
+
+.field__hint {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.field__error {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  color: var(--red-700);
+}
+
+
+/*CARD & SURFACE COMPONENT
+Nguyên tắc từ sách: Hạn chế dùng đường kẻ border-top để chia cắt phần thân và
+ phần chân thẻ (chứa các nút hành động). Thay vào đó, hãy đổi màu nền của phần chân thẻ sang --gray-50 hoặc --gray-100
+  để phân tách khu vực một cách êm dịu. Nếu thẻ cần điểm nhấn thương hiệu, hãy thêm một đường viền dày 4px ở cạnh đỉnh.
+*/
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border);
+  overflow: hidden; /* Giữ cho màu nền của footer bo theo góc của card */
+}
+
+/* Biến thể tạo điểm nhấn ở cạnh trên theo chương "Finishing Touches" */
+.card--accent-top {
+  border-top: 4px solid var(--blue-500);
+}
+
+.card__body {
+  padding: var(--card-padding);
+}
+
+.card__title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  color: var(--text-primary);
+}
+
+.card__subtitle {
+  margin-top: var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* Chân thẻ phân tách bằng màu nền nhẹ thay vì kẻ vạch nặng nề */
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--card-padding);
+  background-color: var(--card-footer-bg);
+}
+
+/*BADGE
+Nguyên tắc từ sách:
+ Không bao giờ dùng nền màu tươi chói kết hợp chữ trắng cho các nhãn trạng thái
+  trong bảng dữ liệu vì chúng sẽ cướp hết sự chú ý của nút bấm chính. Hãy đảo ngược
+   tương phản: dùng nền mức 100 và chữ mức 700/900, kết hợp một chấm tròn nhỏ mức 500
+    để tăng tính biểu đạt.
+*/
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding: var(--space-1) var(--space-2-5);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+/* Chấm tròn trạng thái đi kèm bên trái chữ */
+.badge::before {
+  content: "";
+  width: 0.375rem; /* 6px */
+  height: 0.375rem;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+  opacity: 0.75;
+}
+
+.badge--neutral {
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+}
+
+.badge--success {
+  background-color: var(--green-100);
+  color: var(--green-900);
+}
+.badge--success::before { background-color: var(--green-500); opacity: 1; }
+
+.badge--warning {
+  background-color: var(--amber-100);
+  color: var(--amber-900);
+}
+.badge--warning::before { background-color: var(--amber-500); opacity: 1; }
+
+.badge--danger {
+  background-color: var(--red-100);
+  color: var(--red-900);
+}
+.badge--danger::before { background-color: var(--red-500); opacity: 1; }
+
+
+/*DATA TABLE MULTI
+Nguyên tắc từ sách: Bảng dữ liệu đẹp nhờ sự thẳng hàng và tinh gọn cột.
+ Tiêu đề cột không cần cỡ chữ to—hãy thu nhỏ về --fs-xs (12px), viết hoa toàn bộ (uppercase),
+  giãn khoảng cách chữ (letter-spacing: 0.05em) và tô đậm trên nền --gray-100. Với các cột chứa thông tin liên quan
+   (như Tên và Email, hoặc Từ vựng và Nghĩa), hãy gộp chúng vào cùng một ô (<td>) thành 2 dòng với độ tương phản khác nhau
+    thay vì tách thành 2 cột rời rạc.
+*/
+.table-container {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-2);
+  border: 1px solid var(--border-subtle);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--fs-sm);
+}
+
+.table th {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--gray-100);
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.table td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background-color: var(--gray-50);
+}
+
+/* Cột số liệu: Căn phải và ép độ rộng con số bằng nhau để dễ so sánh dọc */
+.table__cell--numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+/* Kỹ thuật gộp 2 tầng thông tin vào 1 ô để tiết kiệm cột */
+.cell-primary {
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+.cell-secondary {
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+
+/*ARLERT
+Nguyên tắc từ sách: Tương tự như Badge, hộp thông báo dùng nền màu 100 dịu mắt,
+ chữ tiêu đề màu 900, chữ mô tả màu 700,
+  và tạo ranh giới rõ ràng bằng một đường viền trái dày 4px mang màu 500.
+*/
+.alert {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--radius-2);
+  border-left: 4px solid transparent;
+  font-size: var(--fs-sm);
+}
+
+.alert__title {
+  font-weight: var(--fw-semibold);
+}
+
+.alert--info {
+  background-color: var(--blue-100);
+  border-left-color: var(--blue-500);
+  color: var(--blue-900);
+}
+
+.alert--warning {
+  background-color: var(--amber-100);
+  border-left-color: var(--amber-500);
+  color: var(--amber-900);
+}
+
+.alert--danger {
+  background-color: var(--red-100);
+  border-left-color: var(--red-500);
+  color: var(--red-900);
+}

@@ -3,8 +3,13 @@
 </header>
 <section class="data-table">
   <div class="filter-data">
-    <input (input)="searchInput($event)" placeholder="Tên công việc, trạng thái, loại từ..." type="text" />
-    <button type="button"></button>
+    <input class="input-search" (input)="searchInput($event)" placeholder="Tên công việc, trạng thái, loại từ..." type="text" />
+    <button type="button" class="btn badge">Đã xuất bản</button>
+    <button type="button" class="btn badge">Chưa xuất bản</button>
+    <button type="button" class="btn badge">Danh từ</button>
+    <button type="button" class="btn badge">Động từ</button>
+    <button type="button" class="btn badge">Tính từ</button>
+    <button type="button" class="btn badge active">Trạng từ</button>
   </div>
   <table class="table">
     <thead>

@@ -1,19 +1,19 @@
 .data-table {
-  font-size: var(--font-sm);
-  background-color: var(--background-color);
+  font-size: var(--fs-sm);
+  background-color: var(--bg-page);
   width: 100%;
 }
 
 .table thead {
   font-weight: 700;
   color: var(--blue-900);
-  font-size: var(--font-sm);
+  font-size: var(--fs-sm);
   background-color: var(--blue-100);
 }
 
 .table td {
   padding: 0.75rem;
-  font-size: var(--font-xs);
+  font-size: var(--fs-xs);
 }
 
 .table tbody tr:nth-child(odd) td {
@@ -26,4 +26,43 @@
 
 .table tbody td:last-child {
   border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.filter-data{
+  display: flex;
+  flex-direction: row;
+  align-content: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin: var(--space-2) 0 var(--space-1) 0 ;
+}
+.input-search{
+  flex:0;
+  padding: var(--space-1) var(--space-2);
+  border :1px solid transparent;
+  box-shadow: var(--shadow-inset), var(--shadow-3);
+  border-radius: var(--radius-1);
+}
+.badge {
+  background-color: var(--bg-page);
+  border-radius: var(--radius-3);
+  font-size: var(--fs-xs);
+  padding: var(--space-1);
+  border:1px solid var(--gray-200);
+  box-shadow: var(--shadow-2);
+  color:var(--gray-900);
+}
+
+.badge:hover{
+  background-color: var(--gray-100);
+  cursor:pointer;
+}
+
+.badge:active {
+  transform: translateY(1px);
+  box-shadow:var(--shadow-1)
+}
+
+.badge.active {
+  background-color: var(--gray-200);
 }
