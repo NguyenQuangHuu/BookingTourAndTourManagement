@@ -1,9 +1,11 @@
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
-import { VocabState, VocabularyReadModel, WordType } from './dictionary.model';
+import { VocabularyReadModel, WordType } from './dictionary.model';
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { DictionaryApi } from './dictionary-api.service.';
+
+export type PublishState = 'PUBLISHED' | 'UNPUBLISHED'
 
 
 const KEY_VOCABS_LS = 'german-word.vocabs';
@@ -20,8 +22,8 @@ type vocabularyState = {
   vocabs: VocabularyReadModel[];
   searchQuery: string;
   sortBy: 'asc' | 'desc';
-  selectedState: 'ALL' | VocabState;
-  selectedWordType: WordType | 'ALL';
+  selectedState: PublishState | null;
+  selectedWordType: WordType | null;
   isLoading: boolean;
   error: string | null;
 };
@@ -29,8 +31,8 @@ const initVocabState: vocabularyState = {
   vocabs: [] as VocabularyReadModel[],
   searchQuery: '',
   sortBy: 'asc',
-  selectedState: 'ALL',
-  selectedWordType: 'ALL',
+  selectedState: null,
+  selectedWordType: null,
   isLoading: false,
   error: null
 };
@@ -53,7 +55,7 @@ const VocabularyStore = signalStore(
     }),
     filterVocabs: computed(() => {
       return vocabs().filter((v) => {
-        const choiceState = selectedState() === 'ALL' || v.state === selectedState();
+        const choiceState = v.state === null ? true : selectedState() === 'PUBLISHED' ? v.state === 'PUBLISHED' : v.state !== 'PUBLISHED';
         const q = searchQuery().trim();
         return choiceState && (v.german_word.includes(q) || v.state.includes(q) || v.word_type?.toString().includes(q));
       });
@@ -63,8 +65,11 @@ const VocabularyStore = signalStore(
     setSearchQuery(query: string) {
       patchState(store, { searchQuery: query });
     },
-    setStateFilter(state: VocabState | 'ALL') {
+    setStateFilter(state: PublishState | null) {
       patchState(store, { selectedState: state });
+    },
+    setWordTypeFilter(wordType: WordType | null) {
+      patchState(store, { selectedWordType: wordType });
     },
     loadVocabs: rxMethod<void>(
       pipe(

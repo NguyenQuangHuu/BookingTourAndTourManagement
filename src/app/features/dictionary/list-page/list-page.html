@@ -3,13 +3,23 @@
 </header>
 <section class="data-table">
   <div class="filter-data">
-    <input class="input-search" (input)="searchInput($event)" placeholder="Tên công việc, trạng thái, loại từ..." type="text" />
-    <button type="button" class="btn badge">Đã xuất bản</button>
-    <button type="button" class="btn badge">Chưa xuất bản</button>
-    <button type="button" class="btn badge">Danh từ</button>
-    <button type="button" class="btn badge">Động từ</button>
-    <button type="button" class="btn badge">Tính từ</button>
-    <button type="button" class="btn badge active">Trạng từ</button>
+    <input (input)="searchInput($event)" class="input-search" placeholder="Tên công việc, trạng thái, loại từ..."
+           type="text" />
+    <select (change)="selectedFilter($event)" class="select-filter">
+      <option class="" value="">Loại từ</option>
+      <option class="" value="Noun">Danh từ</option>
+      <option class="" value="Verb">Động từ</option>
+      <option class="" value="Adjective">Tính từ</option>
+      <option class="" value="Adverb">Trạng từ</option>
+    </select>
+    <button (click)="stateFilter($event)" [class.btn-filter--active]="this.selectPublishState()==='PUBLISHED'"
+            class="btn-filter"
+            type="button" value="PUBLISHED">Đã xuất bản
+    </button>
+    <button (click)="stateFilter($event)" [class.btn-filter--active]="this.selectPublishState()==='UNPUBLISHED'"
+            class="btn-filter"
+            type="button" value="UNPUBLISHED">Chưa xuất bản
+    </button>
   </div>
   <table class="table">
     <thead>
