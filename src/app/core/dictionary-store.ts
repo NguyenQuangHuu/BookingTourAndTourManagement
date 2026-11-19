@@ -39,7 +39,7 @@ const initVocabState: vocabularyState = {
 
 const VocabularyStore = signalStore(
   withState(initVocabState),
-  withComputed(({ vocabs, searchQuery, selectedState }) => ({
+  withComputed(({ vocabs, searchQuery, selectedState, selectedWordType }) => ({
     vocabCount: computed(() => vocabs().length),
     draftCount: computed(() => vocabs().filter((x) => x.state === 'DRAFT').length),
     reviewsCount: computed(() => vocabs().filter((x) => x.state === 'PENDING_FOR_REVIEW').length)
@@ -54,10 +54,14 @@ const VocabularyStore = signalStore(
       };
     }),
     filterVocabs: computed(() => {
+      const state = selectedState();
+      const wordType = selectedWordType();
+      const query = searchQuery().trim();
       return vocabs().filter((v) => {
-        const choiceState = v.state === null ? true : selectedState() === 'PUBLISHED' ? v.state === 'PUBLISHED' : v.state !== 'PUBLISHED';
-        const q = searchQuery().trim();
-        return choiceState && (v.german_word.includes(q) || v.state.includes(q) || v.word_type?.toString().includes(q));
+        const matchState = v.state === null ? true : selectedState() === 'PUBLISHED' ? v.state === 'PUBLISHED' : v.state !== 'PUBLISHED';
+        const matchWordType = !wordType || wordType === v.word_type;
+        const matchQuery = !query || v.german_word.toLowerCase().includes(query);
+        return matchState && matchWordType && matchQuery;
       });
     })
   })),
@@ -71,6 +75,10 @@ const VocabularyStore = signalStore(
     setWordTypeFilter(wordType: WordType | null) {
       patchState(store, { selectedWordType: wordType });
     },
+    setResetFilter() {
+      patchState(store, { selectedState: null, selectedWordType: null, searchQuery: '' });
+    }
+    ,
     loadVocabs: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),

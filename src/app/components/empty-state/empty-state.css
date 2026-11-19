@@ -1,0 +1,83 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  border: 1px dashed var(--border-subtle, hsl(214, 32%, 86%));
+  border-radius: 0.75rem;
+  background-color: var(--bg-surface, hsl(210, 40%, 98%));
+  margin: 0 auto;
+}
+
+.empty-state__icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border-radius: 9999px;
+  background-color: var(--bg-subtle, hsl(210, 30%, 93%));
+  color: var(--text-muted, hsl(215, 16%, 47%));
+}
+
+.empty-state__title {
+  margin: 0 0 0.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary, hsl(222, 47%, 11%));
+}
+
+.empty-state__description {
+  margin: 0 0 1.25rem;
+  max-width: 38ch;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-secondary, hsl(215, 16%, 47%));
+}
+
+/* Nút Secondary mặc định (dùng cho hành động "Xóa bộ lọc") */
+.empty-state__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  padding: 0 1rem;
+  border: 1px solid var(--border-default, hsl(214, 32%, 82%));
+  border-radius: 0.5rem;
+  background-color: var(--card-bg, hsl(0, 0%, 100%));
+  color: var(--text-primary, hsl(222, 47%, 11%));
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 2px hsla(222, 47%, 11%, 0.05);
+  transition: background-color 150ms ease, border-color 150ms ease, transform 80ms ease;
+}
+
+.empty-state__btn:hover {
+  background-color: hsl(210, 40%, 96%);
+  border-color: hsl(214, 32%, 74%);
+}
+
+.empty-state__btn:active {
+  transform: translateY(1px);
+}
+
+.empty-state__btn:focus-visible {
+  outline: 2px solid var(--blue-500, hsl(221, 83%, 53%));
+  outline-offset: 2px;
+}
+
+/* Biến thể Primary (chỉ dùng khi kho dữ liệu trống hoàn toàn) */
+.empty-state__btn--primary {
+  border-color: var(--blue-500, hsl(221, 83%, 53%));
+  background-color: var(--blue-500, hsl(221, 83%, 53%));
+  color: hsl(0, 0%, 100%);
+}
+
+.empty-state__btn--primary:hover {
+  background-color: hsl(221, 83%, 47%);
+  border-color: hsl(221, 83%, 47%);
+}

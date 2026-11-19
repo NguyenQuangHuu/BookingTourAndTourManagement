@@ -1,0 +1,37 @@
+<section aria-live="polite" class="empty-state" role="status">
+  <div aria-hidden="true" class="empty-state__icon">
+    @if (icon() === 'search') {
+      <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"
+           viewBox="0 0 24 24" width="24">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+        <path d="M8 11h6" />
+      </svg>
+    } @else {
+      <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"
+           viewBox="0 0 24 24" width="24">
+        <path
+          d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+        <path d="M12 10v6" />
+        <path d="M9 13h6" />
+      </svg>
+    }
+  </div>
+
+  <h3 class="empty-state__title">{{ title() }}</h3>
+
+  @if (description()) {
+    <p class="empty-state__description">{{ description() }}</p>
+  }
+
+  @if (actionLabel()) {
+    <button
+      (click)="action.emit()"
+      [class.empty-state__btn--primary]="variant() === 'primary'"
+      class="empty-state__btn"
+      type="button"
+    >
+      {{ actionLabel() }}
+    </button>
+  }
+</section>

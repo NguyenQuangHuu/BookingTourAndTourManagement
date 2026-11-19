@@ -1,51 +1,78 @@
 <header>
   <h2>Danh sách từ vựng</h2>
-</header>
-<section class="data-table">
   <div class="filter-data">
-    <input (input)="searchInput($event)" class="input-search" placeholder="Tên công việc, trạng thái, loại từ..."
+    <input (input)="searchInput($event)" [value]="vocab_store.searchQuery()" class="input"
+           placeholder="Tên công việc, trạng thái, loại từ..."
            type="text" />
-    <select (change)="selectedFilter($event)" class="select-filter">
+    <select (change)="selectedFilter($event)" [value]="vocab_store.selectedState() ?? ''" class="btn btn--secondary"
+    >
       <option class="" value="">Loại từ</option>
       <option class="" value="Noun">Danh từ</option>
       <option class="" value="Verb">Động từ</option>
       <option class="" value="Adjective">Tính từ</option>
       <option class="" value="Adverb">Trạng từ</option>
     </select>
-    <button (click)="stateFilter($event)" [class.btn-filter--active]="this.selectPublishState()==='PUBLISHED'"
-            class="btn-filter"
-            type="button" value="PUBLISHED">Đã xuất bản
-    </button>
-    <button (click)="stateFilter($event)" [class.btn-filter--active]="this.selectPublishState()==='UNPUBLISHED'"
-            class="btn-filter"
-            type="button" value="UNPUBLISHED">Chưa xuất bản
-    </button>
+    <div class="btn-group" role="group">
+      <button (click)="stateFilter($event)" [class.btn-filter--active]="vocab_store.selectedState()==='PUBLISHED'"
+              class="btn btn--secondary"
+              type="button" value="PUBLISHED">Đã xuất bản
+      </button>
+      <button (click)="stateFilter($event)" [class.btn-filter--active]="vocab_store.selectedState()==='UNPUBLISHED'"
+              class="btn btn--secondary"
+              type="button" value="UNPUBLISHED">Chưa xuất bản
+      </button>
+    </div>
+
   </div>
+</header>
+<section class="table-container">
   <table class="table">
     <thead>
-    <td>Từ vựng</td>
-    <td>Nghĩa</td>
-    <td>Nhãn</td>
-    <td>Trạng thái</td>
-    <td>Loại từ</td>
-    <td>Ngày tạo</td>
-    <td>Chi tiết</td>
-    <td>Tương tác</td>
+    <th>Từ vựng</th>
+    <th>Nghĩa</th>
+    <th>Nhãn</th>
+    <th>Trạng thái</th>
+    <th>Loại từ</th>
+    <th>Ngày tạo</th>
+    <th>Chi tiết</th>
+    <th>Tương tác</th>
     </thead>
     <tbody>
       @for (x of vocab_store.filterVocabs(); track x.id) {
         <tr>
           <td>{{ x.german_word }}</td>
           <td>{{ x.meanings }}</td>
-          <td>@for (tag of x.tags; track tag) {
-            <span>{{ tag }}</span>
-          }</td>
+          <td>
+            @for (tag of x.tags; track tag) {
+              <span class="badge">{{ tag }}</span>
+            }
+          </td>
           <td>{{ x.state }}</td>
           <td>{{ x.word_type }}</td>
           <td>{{ x.created_at }}</td>
           <td>{{ x.detail }}</td>
           <td><span>Chi tiết</span><span>Sửa</span><span>Xóa</span></td>
         </tr>
+      } @empty {
+        @if (hasActiveFilters()) {
+          <app-empty-state
+            (action)="resetFilter()"
+            actionLabel="Xóa tất cả bộ lọc"
+            description="Không có từ vựng nào khớp với từ khóa hoặc bộ lọc hiện tại. Hãy thử điều chỉnh lại điều kiện tìm kiếm."
+            icon="search"
+            title="Không tìm thấy từ vựng phù hợp"
+            variant="secondary"
+          />
+        } @else {
+          <app-empty-state
+            (action)="openCreateModal()"
+            actionLabel="Thêm từ vựng mới"
+            description="Kho từ vựng tiếng Đức hiện đang trống. Hãy bắt đầu bằng việc thêm mục từ đầu tiên."
+            icon="folder"
+            title="Chưa có từ vựng nào"
+            variant="primary"
+          />
+        }
       }
     </tbody>
   </table>

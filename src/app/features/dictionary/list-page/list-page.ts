@@ -1,10 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import VocabularyStore, { PublishState } from '../../../core/dictionary-store';
 import { WordType } from '../../../core/dictionary.model';
-
+import { EmptyState } from '../../../components/empty-state/empty-state';
 
 @Component({
-  imports: [],
+  imports: [EmptyState],
   providers: [VocabularyStore],
   selector: 'app-list-page',
   styleUrl: './list-page.css',
@@ -13,28 +13,39 @@ import { WordType } from '../../../core/dictionary.model';
 })
 export class ListPage {
   vocab_store = inject(VocabularyStore);
-  search = signal<string>('');
-  selectPublishState = signal<PublishState | null>(null);
+  readonly hasActiveFilters = computed(() => {
+    return (
+      this.vocab_store.searchQuery().trim() !== '' ||
+      this.vocab_store.selectedWordType() !== null ||
+      this.vocab_store.selectedState() !== null
+    );
+  });
 
   constructor() {
   }
 
   searchInput(event: Event) {
     const inp = (event.target as HTMLInputElement);
-    this.search.update(() => inp.value);
-    this.vocab_store.setSearchQuery(this.search());
+    this.vocab_store.setSearchQuery(inp.value);
   }
 
   selectedFilter(event: Event) {
     const selected = (event.target as HTMLSelectElement);
-    const value = selected.value as WordType;
-    this.vocab_store.setWordTypeFilter(value);
+    const selectValue = selected.value === '' ? null : selected.value as WordType;
+    this.vocab_store.setWordTypeFilter(selectValue);
   }
 
   stateFilter(event: Event) {
-    const btn = (event.target as HTMLButtonElement);
-    const selectedValue = btn.value as PublishState;
-    this.selectPublishState.update((value) => value === selectedValue ? null : selectedValue);
-    this.vocab_store.setStateFilter(this.selectPublishState());
+    const btn = (event.currentTarget as HTMLButtonElement);
+    const selectedValue = btn.value === null ? null : btn.value as PublishState;
+    this.vocab_store.setStateFilter(selectedValue);
+  }
+
+  openCreateModal() {
+    console.log('click');
+  }
+
+  resetFilter() {
+    this.vocab_store.setResetFilter();
   }
 }
