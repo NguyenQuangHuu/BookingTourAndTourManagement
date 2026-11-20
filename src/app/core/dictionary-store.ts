@@ -56,9 +56,9 @@ const VocabularyStore = signalStore(
     filterVocabs: computed(() => {
       const state = selectedState();
       const wordType = selectedWordType();
-      const query = searchQuery().trim();
+      const query = searchQuery().toLowerCase().trim();
       return vocabs().filter((v) => {
-        const matchState = v.state === null ? true : selectedState() === 'PUBLISHED' ? v.state === 'PUBLISHED' : v.state !== 'PUBLISHED';
+        const matchState = state === null ? true : state !== 'PUBLISHED' ? v.state !== 'PUBLISHED' : v.state === 'PUBLISHED';
         const matchWordType = !wordType || wordType === v.word_type;
         const matchQuery = !query || v.german_word.toLowerCase().includes(query);
         return matchState && matchWordType && matchQuery;

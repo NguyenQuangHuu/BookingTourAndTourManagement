@@ -243,7 +243,7 @@ input, button, textarea, select {
   box-shadow: var(--btn-shadow);
 }
 
-.btn--primary:hover:not(:disabled) {
+.btn--primary:hover:not(:disabled):not(:active) {
   background-color: var(--btn-primary-bg-hover);
 }
 
@@ -258,7 +258,7 @@ input, button, textarea, select {
   box-shadow: var(--btn-shadow);
 }
 
-.btn--secondary:hover:not(:disabled) {
+.btn--secondary:hover:not(:disabled):not(:active) {
   background-color: var(--btn-secondary-bg-hover);
   border-color: var(--gray-400);
 }

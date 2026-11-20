@@ -4,7 +4,9 @@ import { WordType } from '../../../core/dictionary.model';
 import { EmptyState } from '../../../components/empty-state/empty-state';
 
 @Component({
-  imports: [EmptyState],
+  imports: [
+    EmptyState
+  ],
   providers: [VocabularyStore],
   selector: 'app-list-page',
   styleUrl: './list-page.css',
@@ -36,13 +38,13 @@ export class ListPage {
   }
 
   stateFilter(event: Event) {
-    const btn = (event.currentTarget as HTMLButtonElement);
-    const selectedValue = btn.value === null ? null : btn.value as PublishState;
+    const value = (event.currentTarget as HTMLButtonElement).value;
+    const selectedValue = this.vocab_store.selectedState() === value ? null : value as PublishState;
     this.vocab_store.setStateFilter(selectedValue);
   }
 
-  openCreateModal() {
-    console.log('click');
+  createDraftVocab() {
+    console.log('Create Draft Vocab');
   }
 
   resetFilter() {

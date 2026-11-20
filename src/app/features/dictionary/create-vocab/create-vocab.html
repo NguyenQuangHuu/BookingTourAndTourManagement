@@ -1,11 +1,19 @@
-<form (submit)="onSubmit($event)" novalidate>
-  <input [formField]="createForm.german_word" type="text" />
-  @if (createForm.german_word().dirty()) {
-    @if (createForm.german_word().errors(); as errors) {
-      @for (err of errors; track $index) {
-        <span>{{ err.message }}</span>
-      }
-    }
-  }
-  <button type="submit">submit</button>
-</form>
+<dialog
+  aria-labelledby="create-vocab-title"
+  class="modal"
+>
+  <form [formRoot]="createForm" novalidate>
+    <label class="label">Từ vựng
+      <input [formField]="createForm.german_word" class="input input--sm" placeholder="die Schule..." type="text" />
+    </label>
+    <label class="label">Loại từ
+      <select [formField]="createForm.word_type">
+        <option value="Noun">Danh từ</option>
+        <option value="Verb">Động từ</option>
+        <option value="Adjective">Tính từ</option>
+        <option value="Adverb">Trạng từ</option>
+      </select>
+    </label>
+    <button (submit)="onSubmit($event)" type="submit">thêm</button>
+  </form>
+</dialog>
