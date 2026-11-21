@@ -1,11 +1,15 @@
 import { Component, computed, inject } from '@angular/core';
-import VocabularyStore, { PublishState } from '../../../core/dictionary-store';
+import VocabularyStore from '../../../core/dictionary-store';
 import { WordType } from '../../../core/dictionary.model';
 import { EmptyState } from '../../../components/empty-state/empty-state';
+import { Icon } from '../../../components/icon/icon';
+import { AppButton } from '../../../components/button/button';
 
 @Component({
   imports: [
-    EmptyState
+    EmptyState,
+    Icon,
+    AppButton
   ],
   providers: [VocabularyStore],
   selector: 'app-list-page',
@@ -17,9 +21,9 @@ export class ListPage {
   vocab_store = inject(VocabularyStore);
   readonly hasActiveFilters = computed(() => {
     return (
-      this.vocab_store.searchQuery().trim() !== '' ||
-      this.vocab_store.selectedWordType() !== null ||
-      this.vocab_store.selectedState() !== null
+      this.vocab_store.vocabFilter().searchQuery.trim() !== '' ||
+      this.vocab_store.vocabFilter().wordType !== null ||
+      this.vocab_store.vocabFilter().publishState !== null
     );
   });
 
@@ -38,8 +42,8 @@ export class ListPage {
   }
 
   stateFilter(event: Event) {
-    const value = (event.currentTarget as HTMLButtonElement).value;
-    const selectedValue = this.vocab_store.selectedState() === value ? null : value as PublishState;
+    const value = (event.currentTarget as HTMLButtonElement).value === 'true';
+    const selectedValue = this.vocab_store.vocabFilter().publishState === value ? null : value;
     this.vocab_store.setStateFilter(selectedValue);
   }
 

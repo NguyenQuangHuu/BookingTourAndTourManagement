@@ -18,28 +18,42 @@ function loadData(): VocabularyReadModel[] {
   }
 }
 
+type VocabularyFilter = {
+  publishState: boolean | null;
+  wordType: WordType | null;
+  searchQuery: string;
+  sortDirection: 'asc' | 'desc';
+  sortBy: string;
+}
+
 type vocabularyState = {
   vocabs: VocabularyReadModel[];
-  searchQuery: string;
-  sortBy: 'asc' | 'desc';
-  selectedState: PublishState | null;
-  selectedWordType: WordType | null;
+  // searchQuery: string;
+  // sortBy: 'asc' | 'desc';
+  // selectedState: PublishState | null;
+  // selectedWordType: WordType | null;
+  vocabFilter: VocabularyFilter;
   isLoading: boolean;
   error: string | null;
 };
+const initVocabularyFilter: VocabularyFilter = {
+  publishState: null, searchQuery: '', sortBy: 'german_word', sortDirection: 'asc', wordType: null
+
+};
 const initVocabState: vocabularyState = {
   vocabs: [] as VocabularyReadModel[],
-  searchQuery: '',
-  sortBy: 'asc',
-  selectedState: null,
-  selectedWordType: null,
+  vocabFilter: initVocabularyFilter,
+  // searchQuery: '',
+  // sortBy: 'asc',
+  // selectedState: null,
+  // selectedWordType: null,
   isLoading: false,
   error: null
 };
 
 const VocabularyStore = signalStore(
   withState(initVocabState),
-  withComputed(({ vocabs, searchQuery, selectedState, selectedWordType }) => ({
+  withComputed(({ vocabs, vocabFilter }) => ({
     vocabCount: computed(() => vocabs().length),
     draftCount: computed(() => vocabs().filter((x) => x.state === 'DRAFT').length),
     reviewsCount: computed(() => vocabs().filter((x) => x.state === 'PENDING_FOR_REVIEW').length)
@@ -49,16 +63,16 @@ const VocabularyStore = signalStore(
       const nouns = vocabs().filter((x) => x.word_type === 'Noun' && !!x.detail);
       return {
         der: nouns.filter(v => 'gender' in v.detail! && v.detail.gender === 'masculine').length,
-        die: nouns.filter(v => 'gender' in v.detail! && v.detail.gender === 'masculine').length,
+        die: nouns.filter(v => 'gender' in v.detail! && v.detail.gender === 'feminine').length,
         das: nouns.filter(v => 'gender' in v.detail! && v.detail.gender === 'neutral').length
       };
     }),
     filterVocabs: computed(() => {
-      const state = selectedState();
-      const wordType = selectedWordType();
-      const query = searchQuery().toLowerCase().trim();
+      const state = vocabFilter().publishState;
+      const wordType = vocabFilter().wordType;
+      const query = vocabFilter().searchQuery.toLowerCase().trim();
       return vocabs().filter((v) => {
-        const matchState = state === null ? true : state !== 'PUBLISHED' ? v.state !== 'PUBLISHED' : v.state === 'PUBLISHED';
+        const matchState = state === null ? true : state ? v.state === 'PUBLISHED' : v.state !== 'PUBLISHED';
         const matchWordType = !wordType || wordType === v.word_type;
         const matchQuery = !query || v.german_word.toLowerCase().includes(query);
         return matchState && matchWordType && matchQuery;
@@ -67,16 +81,18 @@ const VocabularyStore = signalStore(
   })),
   withMethods((store, service = inject(DictionaryApi)) => ({
     setSearchQuery(query: string) {
-      patchState(store, { searchQuery: query });
+      patchState(store, (s) => ({ vocabFilter: { ...s.vocabFilter, searchQuery: query } }));
     },
-    setStateFilter(state: PublishState | null) {
-      patchState(store, { selectedState: state });
+    setStateFilter(state: boolean | null) {
+      patchState(store, (s) => ({ vocabFilter: { ...s.vocabFilter, publishState: state } }));
     },
     setWordTypeFilter(wordType: WordType | null) {
-      patchState(store, { selectedWordType: wordType });
+      patchState(store, (s) => {
+        return { ...s, vocabFilter: { ...s.vocabFilter, wordType } };
+      });
     },
     setResetFilter() {
-      patchState(store, { selectedState: null, selectedWordType: null, searchQuery: '' });
+      patchState(store, { vocabFilter: initVocabularyFilter });
     }
     ,
     loadVocabs: rxMethod<void>(
@@ -85,7 +101,7 @@ const VocabularyStore = signalStore(
         switchMap(() => service.loadData().pipe(
           tap({
             next: (res) => {
-              const items = res.data?.items;
+              const items = res;
               localStorage.setItem(KEY_VOCABS_LS, JSON.stringify(items));
               patchState(store, { vocabs: items, isLoading: false });
             },

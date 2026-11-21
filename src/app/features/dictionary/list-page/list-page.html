@@ -4,11 +4,11 @@
     <button class="btn btn--primary">Thêm bản nháp</button>
   </div>
   <div class="filter-data">
-    <input (input)="searchInput($event)" [value]="vocab_store.searchQuery()" class="input"
+    <input (input)="searchInput($event)" [value]="vocab_store.vocabFilter().searchQuery" class="input"
            placeholder="die Schule, fahren..."
            type="text" />
     <select (change)='selectedFilter($event)'
-            [value]='vocab_store.selectedWordType() === null ? "": vocab_store.selectedWordType()'
+            [value]='vocab_store.vocabFilter().wordType === null ? "": vocab_store.vocabFilter().wordType'
             class="btn btn--secondary"
     >
       <option class="" value="">Loại từ</option>
@@ -18,12 +18,12 @@
       <option class="" value="Adverb">Trạng từ</option>
     </select>
     <div class="btn-group" role="group">
-      <button (click)="stateFilter($event)" [class.active]="vocab_store.selectedState()==='PUBLISHED'"
+      <button (click)="stateFilter($event)" [class.active]="vocab_store.vocabFilter().publishState===true"
               class="btn btn--secondary"
-              type="button" value="PUBLISHED">Đã xuất bản
+              type="button" value="true">Đã xuất bản
       </button>
-      <button (click)="stateFilter($event)" [class.active]="vocab_store.selectedState()==='UNPUBLISHED'"
-              class="btn btn--secondary" type="button" value="UNPUBLISHED">Chưa xuất bản
+      <button (click)="stateFilter($event)" [class.active]="vocab_store.vocabFilter().publishState===false"
+              class="btn btn--secondary" type="button" value="false">Chưa xuất bản
       </button>
     </div>
 
@@ -80,20 +80,32 @@
             <td>{{ x.state }}</td>
             <td>{{ x.created_at }}</td>
             <td>{{ x.detail }}</td>
-            <td><span>Chi tiết</span><span>Sửa</span><span>Xóa</span></td>
+            <td>
+              <button appButton aria-label="Chi tiết" iconOnly size="sm" type="button" variant="secondary">
+                <app-icon name="info"></app-icon>
+              </button>
+              <button appButton iconOnly size="sm" type="button" variant="secondary">
+                <app-icon name="edit"></app-icon>
+              </button>
+              <button appButton iconOnly size="sm" type="button" variant="secondary">
+                <app-icon name="trash"></app-icon>
+              </button>
+
+            </td>
           </tr>
-        } @empty {
-          <app-empty-state
-            (action)="resetFilter()"
-            actionLabel="Tìm kiếm từ vựng"
-            description="Kho từ vựng tiếng Đức không tồn tại từ này. Hãy bắt đầu lại hoặc kiểm tra lại."
-            icon="search"
-            title="Không tìm thấy từ vựng bạn cần"
-            variant="secondary"
-          ></app-empty-state>
         }
       </tbody>
     </table>
+  }
+  @if (vocab_store.filterVocabs().length === 0 && hasActiveFilters()) {
+    <app-empty-state
+      (action)="resetFilter()"
+      actionLabel="Tìm kiếm từ vựng"
+      description="Kho từ vựng tiếng Đức không tồn tại từ này. Hãy bắt đầu lại hoặc kiểm tra lại."
+      icon="search"
+      title="Không tìm thấy từ vựng bạn cần"
+      variant="secondary"
+    ></app-empty-state>
   }
 </section>
 <div>

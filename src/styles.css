@@ -1,67 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
 
-/*@import "tailwindcss";*/
-
-
 :root {
   /* ==========================================
-     TẦNG 1: PRIMITIVE TOKENS (THANG ĐO CƠ SỞ)
+     TẦNG 1: PRIMITIVE TOKENS
      ========================================== */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Cỡ chữ (Font Size) - Đổi sang tiền tố --fs-* để không đụng độ màu chữ */
-  --fs-xs: 0.75rem; /* 12px: Nhãn phụ, badge, chú thích bảng */
-  --fs-sm: 0.875rem; /* 14px: Nhãn form, nút bấm, nội dung bảng */
-  --fs-base: 1rem; /* 16px: Ô nhập liệu (tránh iOS zoom), văn bản chính */
-  --fs-lg: 1.125rem; /* 18px: Tiêu đề thẻ, đoạn dẫn */
-  --fs-xl: 1.25rem; /* 20px: Tiêu đề form, tiêu đề modal */
-  --fs-2xl: 1.5rem; /* 24px: Tiêu đề khu vực (Section) */
-  --fs-3xl: 1.875rem; /* 30px: Tiêu đề trang, con số thống kê KPI */
+  /* Cỡ chữ */
+  --fs-2xs: 0.6875rem; /* 11px: badge, tiêu đề cột bảng */
+  --fs-xs: 0.75rem; /* 12px */
+  --fs-sm: 0.875rem; /* 14px: chuẩn giao diện */
+  --fs-base: 1rem; /* 16px */
+  --fs-lg: 1.125rem; /* 18px */
+  --fs-xl: 1.25rem; /* 20px */
+  --fs-2xl: 1.5rem; /* 24px */
+  --fs-3xl: 1.875rem; /* 30px */
 
-  /* Độ đậm (Font Weight) & Chiều cao dòng (Line Height) */
   --fw-normal: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
 
-  --lh-tight: 1.2; /* Dành cho tiêu đề lớn (--fs-xl trở lên) */
-  --lh-snug: 1.375; /* Dành cho tiêu đề thẻ, nhãn ngắn */
-  --lh-normal: 1.5; /* Chuẩn mặc định cho giao diện */
-  --lh-relaxed: 1.625; /* Dành cho đoạn văn dài */
+  --lh-tight: 1.2;
+  --lh-snug: 1.375;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.625;
 
-  /* Thang khoảng cách (Spacing - Dùng cho padding, margin, gap) */
-  --space-1: 0.25rem; /* 4px */
-  --space-1-5: 0.375rem; /* 6px: Khoảng đệm dọc cho nút nhỏ/badge */
-  --space-2: 0.5rem; /* 8px */
-  --space-2-5: 0.625rem; /* 10px: Khoảng đệm dọc chuẩn cho input/button */
-  --space-3: 0.75rem; /* 12px */
-  --space-4: 1rem; /* 16px */
-  --space-5: 1.25rem; /* 20px: Padding thẻ vừa */
-  --space-6: 1.5rem; /* 24px: Padding thẻ lớn / modal */
-  --space-8: 2rem; /* 32px */
-  --space-10: 2.5rem; /* 40px */
-  --space-12: 3rem; /* 48px */
-  --space-16: 4rem; /* 64px */
+  /* Khoảng cách */
+  --space-1: 0.25rem;
+  --space-1-5: 0.375rem;
+  --space-2: 0.5rem;
+  --space-2-5: 0.625rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
 
-  /* Thang kích thước khung (Layout & Container Sizing - Tách khỏi --space-*) */
-  --width-prose: 65ch; /* Giới hạn 45-75 ký tự/dòng cho văn bản đọc */
-  --width-xs: 20rem; /* 320px: Hộp thoại nhỏ, dropdown */
-  --width-sm: 24rem; /* 384px: Form đăng nhập, thẻ KPI */
-  --width-md: 28rem; /* 448px: Modal tiêu chuẩn */
-  --width-lg: 36rem; /* 576px: Form nhập liệu 1 cột */
-  --width-xl: 48rem; /* 768px: Khung nội dung hẹp */
-  --width-2xl: 64rem; /* 1024px: Bảng dữ liệu vừa */
-  --width-full: 80rem; /* 1280px: Khung trang Dashboard tối đa */
+  /* Khung layout */
+  --width-prose: 65ch;
+  --width-xs: 20rem;
+  --width-sm: 24rem;
+  --width-md: 28rem;
+  --width-lg: 36rem;
+  --width-xl: 48rem;
+  --width-2xl: 64rem;
+  --width-full: 80rem;
 
-  /* Bo góc (Border Radius) */
-  --radius-1: 0.25rem; /* 4px: Checkbox, badge nhỏ */
-  --radius-2: 0.375rem; /* 6px: Input, button tiêu chuẩn */
-  --radius-3: 0.5rem; /* 8px: Card, dropdown, alert */
-  --radius-4: 0.75rem; /* 12px: Modal, panel lớn */
-  --radius-full: 9999px; /* Pill badge, avatar */
+  /* Bo góc */
+  --radius-1: 0.25rem;
+  --radius-2: 0.375rem;
+  --radius-3: 0.5rem;
+  --radius-4: 0.75rem;
+  --radius-full: 9999px;
 
-  /* Bảng màu Xám Lạnh (Cool Grey) - Bổ sung mức 50 làm nền trang cực dịu */
+  /* Xám lạnh */
   --white: hsl(0, 0%, 100%);
   --gray-50: hsl(220, 25%, 98%);
   --gray-100: hsl(220, 20%, 96%);
@@ -74,16 +71,16 @@
   --gray-800: hsl(220, 20%, 20%);
   --gray-900: hsl(220, 28%, 12%);
 
-  /* Màu chủ đạo (Blue) - Bổ sung 200 và 600 */
+  /* Xanh chủ đạo */
   --blue-100: hsl(221, 90%, 96%);
   --blue-200: hsl(221, 88%, 88%);
   --blue-300: hsl(221, 86%, 78%);
   --blue-500: hsl(221, 83%, 53%);
-  --blue-600: hsl(221, 78%, 46%); /* Trạng thái :hover mượt mà */
-  --blue-700: hsl(221, 72%, 38%); /* Trạng thái :active */
+  --blue-600: hsl(221, 78%, 46%);
+  --blue-700: hsl(221, 72%, 38%);
   --blue-900: hsl(221, 62%, 22%);
 
-  /* Màu ngữ nghĩa (Red, Amber, Green) - Chuẩn hóa 5 nấc 100, 300, 500, 700, 900 */
+  /* Màu ngữ nghĩa */
   --red-100: hsl(0, 86%, 96%);
   --red-300: hsl(0, 80%, 82%);
   --red-500: hsl(0, 72%, 51%);
@@ -94,7 +91,7 @@
   --amber-100: hsl(45, 100%, 94%);
   --amber-300: hsl(42, 95%, 76%);
   --amber-500: hsl(38, 92%, 50%);
-  --amber-700: hsl(32, 85%, 32%); /* Đã xoay Hue về 32 để chữ sắc nét trên nền sáng */
+  --amber-700: hsl(32, 85%, 32%);
   --amber-900: hsl(26, 80%, 18%);
 
   --green-100: hsl(142, 70%, 94%);
@@ -103,7 +100,7 @@
   --green-700: hsl(142, 76%, 26%);
   --green-900: hsl(142, 75%, 16%);
 
-  /* Hệ thống bóng đổ 5 cấp độ + Inset + Focus Ring */
+  /* Bóng đổ */
   --shadow-1: 0 1px 2px 0 rgba(18, 26, 38, 0.06);
   --shadow-2: 0 1px 3px 0 rgba(18, 26, 38, 0.10), 0 1px 2px -1px rgba(18, 26, 38, 0.06);
   --shadow-3: 0 4px 6px -1px rgba(18, 26, 38, 0.10), 0 2px 4px -2px rgba(18, 26, 38, 0.06);
@@ -111,27 +108,46 @@
   --shadow-5: 0 20px 25px -5px rgba(18, 26, 38, 0.12), 0 8px 10px -6px rgba(18, 26, 38, 0.05);
   --shadow-inset: inset 0 1px 2px 0 rgba(18, 26, 38, 0.07);
 
+  /* Chuyển động */
+  --duration-fast: 150ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
   /* ==========================================
-     TẦNG 2: SEMANTIC & COMPONENT TOKENS (ĐÃ TINH CHỈNH TỶ LỆ DASHBOARD)
+     TẦNG 2: SEMANTIC & COMPONENT TOKENS
      ========================================== */
   --bg-page: var(--gray-50);
   --bg-surface: var(--white);
   --bg-subtle: var(--gray-100);
+  --bg-hover: var(--gray-200); /* nút ghost, mục menu */
+  --bg-row-hover: var(--gray-100); /* hàng bảng */
+
   --text-primary: var(--gray-900);
   --text-secondary: var(--gray-700);
-  --text-muted: var(--gray-500); /* Hạ từ gray-600 xuống gray-500 để tăng tương phản với text-primary */
+  --text-muted: var(--gray-600); /* gray-500 chưa đạt 4.5:1 với chữ nhỏ, hãy đo lại bằng công cụ contrast */
+
   --border-subtle: var(--gray-200);
   --border-default: var(--gray-300);
 
+  /* Focus */
   --ring-primary: 0 0 0 3px var(--blue-200);
   --ring-danger: 0 0 0 3px var(--red-300);
+  --focus-outline: 2px solid var(--blue-500);
+  --focus-offset: 2px;
 
-  /* 1. Biến cho BUTTON (Chiều cao chuẩn 36px: 7px*2 + 20px + 2px) */
+  /* Control: nguồn chiều cao duy nhất cho button, input, select, nút icon-only */
+  --control-h-sm: 2rem; /* 32px */
+  --control-h-md: 2.25rem; /* 36px */
+  --control-h-lg: 2.75rem; /* 44px, cũng là vùng bấm tối thiểu trên cảm ứng */
+
+  --icon-sm: 0.875rem; /* 14px, đi với chữ 12px */
+  --icon-md: 1rem; /* 16px, đi với chữ 14px */
+  --icon-lg: 1.25rem; /* 20px */
+
+  /* Button */
   --btn-radius: var(--radius-2);
   --btn-fs: var(--fs-sm);
   --btn-fw: var(--fw-semibold);
-  --btn-py: 0.4375rem; /* 7px */
-  --btn-px: 0.875rem; /* 14px */
+  --btn-px: 0.875rem;
   --btn-shadow: var(--shadow-1);
 
   --btn-primary-bg: var(--blue-500);
@@ -149,26 +165,25 @@
   --btn-danger-bg-hover: var(--red-600);
   --btn-danger-bg-active: var(--red-700);
 
-  /* 2. Biến cho INPUT / SELECT (Chiều cao chuẩn 36px đồng bộ tuyệt đối với Button) */
+  /* Input / Select */
   --input-bg: var(--white);
   --input-bg-disabled: var(--gray-100);
   --input-text: var(--gray-900);
-  --input-placeholder: var(--gray-400);
-  --input-border: var(--gray-300); /* Giảm độ gắt so với gray-400 */
+  --input-placeholder: var(--gray-500);
+  --input-border: var(--gray-300);
   --input-border-hover: var(--gray-400);
   --input-border-focus: var(--blue-500);
   --input-border-error: var(--red-500);
   --input-radius: var(--radius-2);
-  --input-py: 0.4375rem; /* 7px + line-height 20px + border 2px = 36px */
-  --input-px: var(--space-3); /* 12px */
+  --input-px: var(--space-3);
   --input-shadow: var(--shadow-inset);
 
-  /* 3. Biến cho CARD & PANEL */
+  /* Card */
   --card-bg: var(--white);
   --card-footer-bg: var(--gray-50);
   --card-radius: var(--radius-3);
-  --card-padding: var(--space-5); /* Giảm từ 24px xuống 20px */
-  --card-shadow: var(--shadow-1); /* Bóng nhẹ hơn để card không quá "nổi" */
+  --card-padding: var(--space-5);
+  --card-shadow: var(--shadow-1);
   --card-border: var(--gray-200);
 }
 
@@ -183,11 +198,33 @@
 
 body {
   font-family: var(--font-sans), sans-serif;
-  font-size: var(--fs-sm); /* Đặt 14px làm chuẩn giao diện ứng dụng */
+  font-size: var(--fs-sm);
   line-height: var(--lh-normal);
   color: var(--text-primary);
   background-color: var(--bg-page);
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: var(--fs-2xl);
+}
+
+h2 {
+  font-size: var(--fs-xl);
+}
+
+h3 {
+  font-size: var(--fs-lg);
+}
+
+h4 {
+  font-size: var(--fs-base);
 }
 
 input, button, textarea, select {
@@ -195,36 +232,100 @@ input, button, textarea, select {
   color: inherit;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
 /* ==========================================
-   BUTTON & FILTER TOGGLE
+   BỐ CỤC TRANG (header + thanh filter)
+   ========================================== */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.page-header__subtitle {
+  margin-top: var(--space-1);
+  color: var(--text-muted);
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.filter-bar .input {
+  width: var(--width-xs);
+}
+
+/* ==========================================
+   BUTTON (LEGACY)
+   Nguồn chính là component AppButton (button.css).
+   Giữ lại để template cũ vẫn chạy; XÓA khi đã chuyển hết sang appButton.
    ========================================== */
 .btn {
+  --icon-size: var(--icon-md);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-1-5);
-  padding: var(--btn-py) var(--btn-px);
+  height: var(--control-h-md);
+  padding: 0 var(--btn-px);
   font-size: var(--btn-fs);
   font-weight: var(--btn-fw);
-  line-height: 1.25rem; /* 20px */
+  line-height: 1;
   border-radius: var(--btn-radius);
   border: 1px solid transparent;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
-  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+  border-color var(--duration-fast) var(--ease-standard),
+  color var(--duration-fast) var(--ease-standard),
+  box-shadow var(--duration-fast) var(--ease-standard);
 }
 
-/* Biến thể nhỏ (32px) dành riêng cho thanh Filter Toolbar và nút trong bảng */
 .btn--sm {
-  padding: 0.3125rem var(--space-3); /* 5px 12px -> cao đúng 32px */
+  --icon-size: var(--icon-sm);
+  height: var(--control-h-sm);
+  padding: 0 var(--space-3);
   font-size: var(--fs-xs);
   font-weight: var(--fw-medium);
 }
 
+.btn--lg {
+  --icon-size: var(--icon-lg);
+  height: var(--control-h-lg);
+  padding: 0 var(--space-5);
+  font-size: var(--fs-base);
+}
+
+.btn--icon {
+  width: var(--control-h-md);
+  padding: 0;
+}
+
+.btn--icon.btn--sm {
+  width: var(--control-h-sm);
+}
+
+.btn--icon.btn--lg {
+  width: var(--control-h-lg);
+}
+
 .btn:focus-visible {
-  outline: none;
-  box-shadow: var(--ring-primary);
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
 }
 
 .btn:active:not(:disabled) {
@@ -267,7 +368,7 @@ input, button, textarea, select {
   background-color: var(--btn-secondary-bg-active);
 }
 
-/* Trạng thái nút lọc đang được kích hoạt (dùng chung với .btn--secondary) */
+/* Nút lọc đang bật */
 .btn--secondary.active,
 .btn--secondary[aria-pressed="true"] {
   background-color: var(--blue-100);
@@ -281,8 +382,12 @@ input, button, textarea, select {
   color: var(--text-secondary);
 }
 
+.btn--ghost.btn--icon {
+  color: var(--text-muted);
+}
+
 .btn--ghost:hover:not(:disabled) {
-  background-color: var(--gray-200);
+  background-color: var(--bg-hover);
   color: var(--text-primary);
 }
 
@@ -292,16 +397,48 @@ input, button, textarea, select {
   box-shadow: var(--btn-shadow);
 }
 
-.btn--danger:hover:not(:disabled) {
+.btn--danger:hover:not(:disabled):not(:active) {
   background-color: var(--btn-danger-bg-hover);
 }
 
+.btn--danger:active:not(:disabled) {
+  background-color: var(--btn-danger-bg-active);
+}
+
 .btn--danger:focus-visible {
-  box-shadow: var(--ring-danger);
+  outline-color: var(--red-500);
+}
+
+/* Nhóm nút nối liền (bộ lọc trạng thái) */
+.btn-group {
+  display: inline-flex;
+}
+
+.btn-group > :is(.btn, [appButton]) {
+  border-radius: 0;
+}
+
+.btn-group > :is(.btn, [appButton]) + :is(.btn, [appButton]) {
+  margin-left: -1px;
+}
+
+.btn-group > :is(.btn, [appButton]):first-child {
+  border-top-left-radius: var(--btn-radius);
+  border-bottom-left-radius: var(--btn-radius);
+}
+
+.btn-group > :is(.btn, [appButton]):last-child {
+  border-top-right-radius: var(--btn-radius);
+  border-bottom-right-radius: var(--btn-radius);
+}
+
+.btn-group > :is(.btn, [appButton]):is(:hover, :focus-visible, .active, [aria-pressed="true"]) {
+  position: relative;
+  z-index: 1; /* viền của nút đang tương tác nằm trên viền nút kề */
 }
 
 /* ==========================================
-   FORM & INPUT (Đồng bộ 36px với Button)
+   FORM, INPUT, SELECT (cùng chiều cao với Button)
    ========================================== */
 .field {
   display: flex;
@@ -310,7 +447,7 @@ input, button, textarea, select {
 }
 
 .field__label {
-  font-size: var(--fs-xs); /* Thu nhỏ nhãn về 12px đậm để làm nổi bật giá trị nhập bên trong */
+  font-size: var(--fs-xs);
   font-weight: var(--fw-semibold);
   color: var(--text-secondary);
 }
@@ -322,28 +459,52 @@ input, button, textarea, select {
   margin-left: var(--space-1);
 }
 
-.input {
+.input,
+.select {
   width: 100%;
-  padding: var(--input-py) var(--input-px);
-  font-size: var(--fs-sm); /* Đổi từ 16px xuống 14px để cân xứng với nút bấm */
-  line-height: 1.25rem; /* 20px */
+  height: var(--control-h-md);
+  padding: 0 var(--input-px);
+  font-size: var(--fs-sm);
+  line-height: 1.25rem;
   background-color: var(--input-bg);
   color: var(--input-text);
   border: 1px solid var(--input-border);
   border-radius: var(--input-radius);
   box-shadow: var(--input-shadow);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+  box-shadow var(--duration-fast) var(--ease-standard);
 }
 
-/* Biến thể nhỏ (32px) cho ô tìm kiếm / select trên thanh filter */
-.input--sm {
-  padding: 0.3125rem var(--space-2-5); /* 5px 10px -> cao đúng 32px */
+/* Textarea tự cao theo nội dung, không ép chiều cao control */
+textarea.input {
+  height: auto;
+  min-height: 5rem;
+  padding: var(--space-2) var(--input-px);
+}
+
+.input--sm,
+.select--sm {
+  height: var(--control-h-sm);
+  padding: 0 var(--space-2-5);
   font-size: var(--fs-xs);
 }
 
-/* Chỉ tăng lên 16px trên thiết bị cảm ứng (iOS) để tránh tự động zoom */
+/* Select: bỏ giao diện gốc, tự vẽ mũi tên */
+.select {
+  width: auto;
+  min-width: 8rem;
+  padding-right: var(--space-8);
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23697180' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.625rem center;
+  background-size: 1rem;
+}
+
+/* Trên cảm ứng: 16px để iOS không tự zoom */
 @media (pointer: coarse) {
-  .input {
+  .input, .select {
     font-size: var(--fs-base);
   }
 }
@@ -352,17 +513,20 @@ input, button, textarea, select {
   color: var(--input-placeholder);
 }
 
-.input:hover:not(:disabled):not(:focus) {
+.input:hover:not(:disabled):not(:focus),
+.select:hover:not(:disabled):not(:focus) {
   border-color: var(--input-border-hover);
 }
 
-.input:focus {
+.input:focus,
+.select:focus {
   outline: none;
   border-color: var(--input-border-focus);
   box-shadow: var(--ring-primary), var(--input-shadow);
 }
 
-.input:disabled {
+.input:disabled,
+.select:disabled {
   background-color: var(--input-bg-disabled);
   color: var(--text-muted);
   cursor: not-allowed;
@@ -392,7 +556,7 @@ input, button, textarea, select {
 }
 
 /* ==========================================
-   CARD & SURFACE
+   CARD
    ========================================== */
 .card {
   background-color: var(--card-bg);
@@ -411,7 +575,7 @@ input, button, textarea, select {
 }
 
 .card__title {
-  font-size: var(--fs-base); /* 16px Semibold đủ nổi bật trên nền text 14px */
+  font-size: var(--fs-base);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-snug);
   color: var(--text-primary);
@@ -430,17 +594,18 @@ input, button, textarea, select {
   gap: var(--space-2);
   padding: var(--space-3) var(--card-padding);
   background-color: var(--card-footer-bg);
+  border-top: 1px solid var(--card-border);
 }
 
 /* ==========================================
-   BADGE (Gọn sắc nét trong bảng)
+   BADGE (trạng thái, có chấm) & TAG (nhãn, không chấm)
    ========================================== */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1-5);
-  padding: 0.1875rem var(--space-2); /* 3px 8px */
-  font-size: 0.6875rem; /* 11px */
+  padding: 0.1875rem var(--space-2);
+  font-size: var(--fs-2xs);
   font-weight: var(--fw-semibold);
   line-height: 1.1;
   border-radius: var(--radius-full);
@@ -491,8 +656,28 @@ input, button, textarea, select {
   opacity: 1;
 }
 
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem var(--space-1-5);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  line-height: 1.2;
+  color: var(--gray-700);
+  background-color: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-1);
+  white-space: nowrap;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
 /* ==========================================
-   DATA TABLE (Tăng mật độ thông tin)
+   DATA TABLE
    ========================================== */
 .table-container {
   background-color: var(--bg-surface);
@@ -510,10 +695,10 @@ input, button, textarea, select {
 }
 
 .table th {
-  padding: var(--space-2) var(--space-3); /* 8px 12px */
+  padding: var(--space-2) var(--space-3);
   background-color: var(--gray-100);
   color: var(--text-muted);
-  font-size: 0.6875rem; /* 11px uppercase tạo độ tương phản rõ với nội dung 14px */
+  font-size: var(--fs-2xs);
   font-weight: var(--fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -521,7 +706,7 @@ input, button, textarea, select {
 }
 
 .table td {
-  padding: 0.5625rem var(--space-3); /* 9px 12px */
+  padding: 0.5625rem var(--space-3);
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border-subtle);
   vertical-align: middle;
@@ -532,7 +717,7 @@ input, button, textarea, select {
 }
 
 .table tbody tr:hover {
-  background-color: var(--gray-50);
+  background-color: var(--bg-row-hover);
 }
 
 .table__cell--numeric {
@@ -540,6 +725,18 @@ input, button, textarea, select {
   font-variant-numeric: tabular-nums;
   font-weight: var(--fw-medium);
   color: var(--text-primary);
+}
+
+/* Cột hành động: nút icon-only xếp sát nhau, căn phải */
+.table__cell--actions {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.table__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-1);
 }
 
 .cell-primary {
@@ -555,6 +752,16 @@ input, button, textarea, select {
   line-height: 1.3;
 }
 
+/* Cắt văn bản dài trong ô (thay cho việc để chi tiết tràn bảng) */
+.cell-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  max-width: var(--width-xs);
+}
+
 /* ==========================================
    ALERT
    ========================================== */
@@ -562,7 +769,7 @@ input, button, textarea, select {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: var(--space-3) var(--space-3);
+  padding: var(--space-3);
   border-radius: var(--radius-2);
   border-left: 3px solid transparent;
   font-size: var(--fs-xs);
