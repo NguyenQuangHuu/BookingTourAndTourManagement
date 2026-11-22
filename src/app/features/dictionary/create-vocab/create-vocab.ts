@@ -1,7 +1,7 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { form, FormField, FormRoot, minLength, required, submit } from '@angular/forms/signals';
 import { VocabState, WordType } from '../../../core/dictionary.model';
-import { DialogRef } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   imports: [FormField, FormRoot],
@@ -11,11 +11,12 @@ import { DialogRef } from '@angular/cdk/dialog';
   standalone: true
 })
 export class CreateVocab {
-  isOpen = input.required<boolean>();
   readonly closed = output<void>();
-  submitted = output<Event>();
-  private readonly dialogRef = inject(DialogRef<CreateVocabPayload>);
+  submitted = output<CreateVocabPayload>();
+  private readonly dialogRef = inject<DialogRef<CreateVocabPayload>>(DialogRef<CreateVocabPayload>);
+  private data = inject<CreateVocabPayload | null>(DIALOG_DATA, { optional: true });
   private readonly createVocabModel = signal<CreateVocabPayload>({
+    id: '',
     german_word: '',
     word_type: '',
     state: 'DRAFT'
@@ -36,15 +37,13 @@ export class CreateVocab {
     // submit() tự động bật touched() cho mọi field và chỉ chạy callback khi form valid()
     submit(this.createForm, async () => {
       const raw = this.createVocabModel();
-      this.dialogRef.close({
-        ...raw,
-        german_word: raw.german_word.trim()
-      });
+      this.dialogRef.close(raw);
     });
   }
 }
 
 export interface CreateVocabPayload {
+  id: string;
   german_word: string;
   word_type: WordType | '';
   state: VocabState;

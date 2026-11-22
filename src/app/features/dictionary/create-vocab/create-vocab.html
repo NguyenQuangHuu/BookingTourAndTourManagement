@@ -1,19 +1,17 @@
-<dialog
-  aria-labelledby="create-vocab-title"
-  class="modal"
->
-  <form [formRoot]="createForm" novalidate>
-    <label class="label">Từ vựng
-      <input [formField]="createForm.german_word" class="input input--sm" placeholder="die Schule..." type="text" />
-    </label>
-    <label class="label">Loại từ
-      <select [formField]="createForm.word_type">
-        <option value="Noun">Danh từ</option>
-        <option value="Verb">Động từ</option>
-        <option value="Adjective">Tính từ</option>
-        <option value="Adverb">Trạng từ</option>
-      </select>
-    </label>
-    <button (submit)="onSubmit($event)" type="submit">thêm</button>
-  </form>
-</dialog>
+<h3>Thêm bản nháp từ vựng</h3>
+<form (submit)="onSubmit($event)" [formRoot]="createForm" class="draft-form" novalidate>
+  <label class="field__label">Từ vựng
+    <input [formField]="createForm.german_word" class="field" placeholder="die Schule..." type="text" />
+  </label>
+  <label class="field__label">Loại từ
+    <select [formField]="createForm.word_type" class="select">
+      <option value="">Loại từ</option>
+      <option value="Noun">Danh từ</option>
+      <option value="Verb">Động từ</option>
+      <option value="Adjective">Tính từ</option>
+      <option value="Adverb">Trạng từ</option>
+    </select>
+  </label>
+  <button (click)="close()" class="btn btn--ghost" type="button">hủy</button>
+  <button class="btn btn--primary" type="submit">thêm</button>
+</form>

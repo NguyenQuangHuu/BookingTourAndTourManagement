@@ -1,0 +1,6 @@
+.draft-form {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-surface);
+  padding: var(--space-4);
+}

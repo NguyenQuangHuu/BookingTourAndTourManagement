@@ -1,7 +1,7 @@
 <header>
   <div class="">
     <h2>Danh sách từ vựng</h2>
-    <button class="btn btn--primary">Thêm bản nháp</button>
+    <button (click)="openCreateModal()" class="btn btn--primary">Thêm bản nháp</button>
   </div>
   <div class="filter-data">
     <input (input)="searchInput($event)" [value]="vocab_store.vocabFilter().searchQuery" class="input"
@@ -32,7 +32,7 @@
 <section class="table-container">
   @if (vocab_store.vocabs().length === 0) {
     <app-empty-state
-      (action)="createDraftVocab()"
+      (action)="openCreateModal()"
       actionLabel="Thêm từ vựng mới"
       description="Kho từ vựng tiếng Đức hiện đang trống. Hãy bắt đầu bằng việc thêm mục từ đầu tiên."
       icon="folder"

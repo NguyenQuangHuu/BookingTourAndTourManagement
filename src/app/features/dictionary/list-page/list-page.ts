@@ -4,21 +4,24 @@ import { WordType } from '../../../core/dictionary.model';
 import { EmptyState } from '../../../components/empty-state/empty-state';
 import { Icon } from '../../../components/icon/icon';
 import { AppButton } from '../../../components/button/button';
+import { CreateVocab } from '../create-vocab/create-vocab';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
 
 @Component({
   imports: [
     EmptyState,
     Icon,
-    AppButton
+    AppButton,
+    DialogModule
   ],
   providers: [VocabularyStore],
   selector: 'app-list-page',
   styleUrl: './list-page.css',
-  templateUrl: './list-page.html',
-  standalone: true
+  templateUrl: './list-page.html'
 })
 export class ListPage {
   vocab_store = inject(VocabularyStore);
+  readonly items = this.vocab_store.vocabs();
   readonly hasActiveFilters = computed(() => {
     return (
       this.vocab_store.vocabFilter().searchQuery.trim() !== '' ||
@@ -26,8 +29,23 @@ export class ListPage {
       this.vocab_store.vocabFilter().publishState !== null
     );
   });
+  readonly dialogRef = inject(Dialog);
 
   constructor() {
+  }
+
+  openCreateModal() {
+    const dialogRef = this.dialogRef.open(CreateVocab, {
+      width: '500px',
+      disableClose: true
+    });
+    dialogRef.closed.subscribe(result => {
+      if (result) {
+        console.log('Dữ liệu form:', result);
+        // Gọi API tại đây để lưu vào database
+        // this.userService.create(result).subscribe(...)
+      }
+    });
   }
 
   searchInput(event: Event) {
@@ -45,10 +63,6 @@ export class ListPage {
     const value = (event.currentTarget as HTMLButtonElement).value === 'true';
     const selectedValue = this.vocab_store.vocabFilter().publishState === value ? null : value;
     this.vocab_store.setStateFilter(selectedValue);
-  }
-
-  createDraftVocab() {
-    console.log('Create Draft Vocab');
   }
 
   resetFilter() {
