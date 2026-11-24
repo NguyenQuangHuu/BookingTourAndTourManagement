@@ -1,17 +1,49 @@
-<h3>Thêm bản nháp từ vựng</h3>
-<form (submit)="onSubmit($event)" [formRoot]="createForm" class="draft-form" novalidate>
-  <label class="field__label">Từ vựng
-    <input [formField]="createForm.german_word" class="field" placeholder="die Schule..." type="text" />
-  </label>
-  <label class="field__label">Loại từ
-    <select [formField]="createForm.word_type" class="select">
-      <option value="">Loại từ</option>
-      <option value="Noun">Danh từ</option>
-      <option value="Verb">Động từ</option>
-      <option value="Adjective">Tính từ</option>
-      <option value="Adverb">Trạng từ</option>
-    </select>
-  </label>
-  <button (click)="close()" class="btn btn--ghost" type="button">hủy</button>
-  <button class="btn btn--primary" type="submit">thêm</button>
-</form>
+<div class="form-container">
+  <h3 class="form-title">Thêm bản nháp từ vựng</h3>
+  <form (submit)="onSubmit($event)" [formRoot]="createForm" class="draft-form" novalidate>
+
+    <label class="field__label">Loại từ
+      <select [formField]="createForm.word_type"
+              class="select">
+        <option value="">Loại từ</option>
+        <option value="Noun">Danh từ</option>
+        <option value="Verb">Động từ</option>
+        <option value="Adjective">Tính từ</option>
+        <option value="Adverb">Trạng từ</option>
+      </select>
+    </label>
+    <legend>
+      <fieldset></fieldset>
+      <div>
+        <label class="field__label">Từ vựng
+        </label>
+        <input [formField]="createForm.german_word" class="field__input" placeholder="die Schule, fahren..."
+               type="text" />
+      </div>
+    </legend>
+
+    <div class="form-detail">
+      @switch (createForm.word_type().value()) {
+        @case ("Noun") {
+          <div>Noun</div>
+        }
+        @case ("Verb") {
+          <div>Verb</div>
+        }
+        @case ("Adjective") {
+          <div>Adjective</div>
+        }
+        @case ("Adverb") {
+          <div>Adverb</div>
+        }
+        @default {
+          <div>Chưa xác định loại từ</div>
+        }
+      }
+    </div>
+    <div class="form-actions">
+      <button (click)="close()" class="btn btn--ghost" type="button">Quay lại</button>
+      <button class="btn btn--primary" type="submit">Thêm bản nháp</button>
+    </div>
+  </form>
+</div>

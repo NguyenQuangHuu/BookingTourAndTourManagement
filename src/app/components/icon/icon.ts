@@ -112,7 +112,7 @@ export type IconName = keyof typeof ICONS;
     }
   `
 })
-export class Icon {
+export class AppIcon {
   readonly name = input.required<IconName>();
   protected readonly paths = computed(() => ICONS[this.name()]);
 }

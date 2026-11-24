@@ -16,15 +16,15 @@ export class CreateVocab {
   private readonly dialogRef = inject<DialogRef<CreateVocabPayload>>(DialogRef<CreateVocabPayload>);
   private data = inject<CreateVocabPayload | null>(DIALOG_DATA, { optional: true });
   private readonly createVocabModel = signal<CreateVocabPayload>({
-    id: '',
     german_word: '',
     word_type: '',
     state: 'DRAFT'
   });
   createForm = form(this.createVocabModel, schemaPath => {
     required(schemaPath.german_word, { message: 'không được để trống' });
-    minLength(schemaPath.german_word, 1, { message: 'độ dài tối thiểu là 2' });
-    // applyWhen(schemaPath, (({ valueOf }) => valueOf(schemaPath.german_word.length>0).length > 0), () => disabled(schemaPath.word_type));
+    minLength(schemaPath.german_word, 2, { message: 'độ dài tối thiểu là 2' });
+    required(schemaPath.word_type, { message: 'chưa chọn loại từ' });
+    // applyWhen(schemaPath, (({ valueOf }) => valueOf(schemaPath.word_type), (p) => required(p.valueOf()));
   });
 
   close() {
@@ -33,17 +33,19 @@ export class CreateVocab {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-
     // submit() tự động bật touched() cho mọi field và chỉ chạy callback khi form valid()
     submit(this.createForm, async () => {
-      const raw = this.createVocabModel();
+      const raw = this.createForm().value();
+      if (this.createForm().invalid()) {
+        console.log(raw);
+        return;
+      }
       this.dialogRef.close(raw);
     });
   }
 }
 
 export interface CreateVocabPayload {
-  id: string;
   german_word: string;
   word_type: WordType | '';
   state: VocabState;

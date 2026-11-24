@@ -1,18 +1,16 @@
 import { Component, computed, inject } from '@angular/core';
 import VocabularyStore from '../../../core/dictionary-store';
 import { WordType } from '../../../core/dictionary.model';
-import { EmptyState } from '../../../components/empty-state/empty-state';
-import { Icon } from '../../../components/icon/icon';
-import { AppButton } from '../../../components/button/button';
 import { CreateVocab } from '../create-vocab/create-vocab';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { AppIcon } from '../../../components/icon/icon';
+import { AppEmptyState } from '../../../components/empty-state/empty-state';
 
 @Component({
   imports: [
-    EmptyState,
-    Icon,
-    AppButton,
-    DialogModule
+    AppIcon,
+    DialogModule,
+    AppEmptyState
   ],
   providers: [VocabularyStore],
   selector: 'app-list-page',
@@ -36,7 +34,7 @@ export class ListPage {
 
   openCreateModal() {
     const dialogRef = this.dialogRef.open(CreateVocab, {
-      width: '500px',
+      width: '496px',
       disableClose: true
     });
     dialogRef.closed.subscribe(result => {

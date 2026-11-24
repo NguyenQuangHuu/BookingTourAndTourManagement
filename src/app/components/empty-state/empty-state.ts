@@ -10,7 +10,7 @@ type EmptyStateVariant = 'primary' | 'secondary';
   templateUrl: './empty-state.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EmptyState {
+export class AppEmptyState {
   readonly title = input.required<string>();
   readonly description = input<string>('');
   readonly actionLabel = input<string>('');
